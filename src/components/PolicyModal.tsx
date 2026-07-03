@@ -28,16 +28,16 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
   };
 
   const getPrivacyContent = () => (
-    <div className="space-y-4 font-sans text-xs text-slate-300 leading-relaxed">
-      <div className="bg-[#000054] border border-[#3D3DAD] rounded-lg p-3.5 mb-4 flex items-start gap-3">
-        <Lock className="w-5 h-5 text-[#3B82F6] shrink-0 mt-0.5" />
+    <div className="space-y-4 font-sans text-xs text-[#2A2A1E] leading-relaxed">
+      <div className="bg-[#F5F5F0] border border-[#DEDCCF] rounded-lg p-3.5 mb-4 flex items-start gap-3">
+        <Lock className="w-5 h-5 text-[#5A5A40] shrink-0 mt-0.5" />
         <div>
-          <h4 className="font-mono font-bold text-[10px] text-[#3B82F6] uppercase tracking-wide">Data Security Guarantee</h4>
-          <p className="text-[11px] text-[#3B82F6] mt-0.5">We utilize local client-side memory storage (localStorage) and secure enterprise IBM Cloud architecture. Your startup's proprietary code, financial structures, and pitches are processed directly and never sold or shared.</p>
+          <h4 className="font-mono font-bold text-[10px] text-[#5A5A40] uppercase tracking-wide">Data Security Guarantee</h4>
+          <p className="text-[11px] text-[#5A5A40] mt-0.5">We utilize local client-side memory storage (localStorage) and secure enterprise IBM Cloud architecture. Your startup's proprietary code, financial structures, and pitches are processed directly and never sold or shared.</p>
         </div>
       </div>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">1. Information We Collect</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">1. Information We Collect</h3>
       <p>
         To deliver targeted grant discovery and draft tailored funding proposals, <strong>Startup Funding Hub</strong> processes:
       </p>
@@ -47,7 +47,7 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
         <li><strong>NLU Keywords:</strong> Search strings processed anonymously via IBM Watson Natural Language Understanding (NLU) to match schemes.</li>
       </ul>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">2. How We Use Your Data</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">2. How We Use Your Data</h3>
       <p>
         Your data is processed strictly for the following purposes:
       </p>
@@ -57,34 +57,34 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
         <li><strong>Local Experience Persistence:</strong> Storing active drafts, generated pitches, and configuration settings in your browser's local cache.</li>
       </ul>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">3. Third-Party Integrations & AI Cloud Processing</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">3. Third-Party Integrations & AI Cloud Processing</h3>
       <p>
         We employ enterprise-grade APIs provided by <strong>IBM Watsonx.ai</strong> (including Text-to-Speech synthesis and Natural Language Understanding). Content is transferred securely over encrypted TLS connections. No prompt parameters or inputs are retained for training third-party public models.
       </p>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">4. Contact Information</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">4. Contact Information</h3>
       <p>
-        For inquiries regarding our cryptographic data processing pipelines or to purge local localStorage cached items, please contact: <a href="mailto:garv26arora@gmail.com" className="text-[#3B82F6] underline font-bold">garv26arora@gmail.com</a>.
+        For inquiries regarding our cryptographic data processing pipelines or to purge local localStorage cached items, please contact: <a href="mailto:garv26arora@gmail.com" className="text-[#5A5A40] underline font-bold">garv26arora@gmail.com</a>.
       </p>
     </div>
   );
 
   const getCookieContent = () => (
-    <div className="space-y-4 font-sans text-xs text-slate-300 leading-relaxed">
-      <div className="bg-[#000054] border border-[#3D3DAD] rounded-lg p-3.5 mb-4 flex items-start gap-3">
-        <Info className="w-5 h-5 text-[#3B82F6] shrink-0 mt-0.5" />
+    <div className="space-y-4 font-sans text-xs text-[#2A2A1E] leading-relaxed">
+      <div className="bg-[#F5F5F0] border border-[#DEDCCF] rounded-lg p-3.5 mb-4 flex items-start gap-3">
+        <Info className="w-5 h-5 text-[#5A5A40] shrink-0 mt-0.5" />
         <div>
-          <h4 className="font-mono font-bold text-[10px] text-[#3B82F6] uppercase tracking-wide">Zero Tracking Commitment</h4>
-          <p className="text-[11px] text-[#3B82F6] mt-0.5">Startup Funding Hub does not utilize invasive advertising, cross-site tracking pixels, or commercial behavioral profiling scripts. Your preferences are stored cleanly on your device.</p>
+          <h4 className="font-mono font-bold text-[10px] text-[#5A5A40] uppercase tracking-wide">Zero Tracking Commitment</h4>
+          <p className="text-[11px] text-[#5A5A40] mt-0.5">Startup Funding Hub does not utilize invasive advertising, cross-site tracking pixels, or commercial behavioral profiling scripts. Your preferences are stored cleanly on your device.</p>
         </div>
       </div>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">1. What are Cookies and Local Storage?</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">1. What are Cookies and Local Storage?</h3>
       <p>
         Cookies and browser local storage (localStorage) are small configuration scripts or key-value entries stored in your browser's memory. They allow the system to recognize your preference selections across sessions without requiring a heavy backend database authentication.
       </p>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">2. How We Use Local Memory Storage</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">2. How We Use Local Memory Storage</h3>
       <p>
         We use local storage strictly for functional, high-fidelity user experiences:
       </p>
@@ -94,7 +94,7 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
         <li><strong>Active Proposal Drafts:</strong> Storing active PDF draft templates and pitch results to prevent loss of intellectual work.</li>
       </ul>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">3. Managing and Opting Out</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">3. Managing and Opting Out</h3>
       <p>
         You can easily control, clear, or prevent local storage entries by modifying your browser's security preferences. To purge all session data immediately, click the 'Reset Profile' or 'Clear Local Cache' options provided in the Startup Profile Configuration panel.
       </p>
@@ -102,21 +102,21 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
   );
 
   const getTermsContent = () => (
-    <div className="space-y-4 font-sans text-xs text-slate-300 leading-relaxed">
-      <div className="bg-[#000054] border border-[#3D3DAD] rounded-lg p-3.5 mb-4 flex items-start gap-3">
-        <FileText className="w-5 h-5 text-[#3B82F6] shrink-0 mt-0.5" />
+    <div className="space-y-4 font-sans text-xs text-[#2A2A1E] leading-relaxed">
+      <div className="bg-[#F5F5F0] border border-[#DEDCCF] rounded-lg p-3.5 mb-4 flex items-start gap-3">
+        <FileText className="w-5 h-5 text-[#5A5A40] shrink-0 mt-0.5" />
         <div>
-          <h4 className="font-mono font-bold text-[10px] text-[#3B82F6] uppercase tracking-wide">Enterprise Legal Framework</h4>
-          <p className="text-[11px] text-[#3B82F6] mt-0.5">Please review these terms carefully before utilizing our automated matching algorithms. These terms protect your intellectual property and outline correct usage guidelines.</p>
+          <h4 className="font-mono font-bold text-[10px] text-[#5A5A40] uppercase tracking-wide">Enterprise Legal Framework</h4>
+          <p className="text-[11px] text-[#5A5A40] mt-0.5">Please review these terms carefully before utilizing our automated matching algorithms. These terms protect your intellectual property and outline correct usage guidelines.</p>
         </div>
       </div>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">1. Description of Services</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">1. Description of Services</h3>
       <p>
         <strong>Startup Funding Hub</strong> is an AI-assisted evaluation tool. It aggregates publicly available governmental, municipal, and private-equity grant opportunities in India and executes contextual, translation-ready match computations using secure IBM Watsonx technologies.
       </p>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">2. No Financial or Legal Representation</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">2. No Financial or Legal Representation</h3>
       <p>
         The content generated by our tools, including proposal outlines, matched scores, and legal advisories:
       </p>
@@ -125,17 +125,17 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
         <li>All schemes (such as SISFS, NIDHI-PRAYAS, BIRAC) are subject to independent government evaluation boards. Users are highly encouraged to cross-reference matched metrics with the primary governmental program dashboards.</li>
       </ul>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">3. Intellectual Property Rights</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">3. Intellectual Property Rights</h3>
       <p>
         Any pitch formulations, generated texts, PDF proposal drafts, or custom strategies produced by the platform belong entirely to the user. <strong>Startup Funding Hub</strong> lays no claim to your intellectual property or the commercial inventions described in your inputs.
       </p>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">4. Limitation of Liability</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">4. Limitation of Liability</h3>
       <p>
         We shall not be liable for any direct, indirect, incidental, or consequential damages resulting from any discrepancies in matched deadlines, amounts, or any rejection of funding applications by governmental agencies.
       </p>
 
-      <h3 className="font-mono font-bold text-[11px] text-[#3B82F6] uppercase tracking-wide">5. Governing Law</h3>
+      <h3 className="font-mono font-bold text-[11px] text-[#5A5A40] uppercase tracking-wide">5. Governing Law</h3>
       <p>
         These Terms of Service shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law principles.
       </p>
@@ -146,26 +146,26 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-[#F1F5F9]/50 backdrop-blur-sm transition-opacity" 
+        className="absolute inset-0 bg-[#1A1A10]/50 backdrop-blur-sm transition-opacity" 
         onClick={onClose}
       />
       
       {/* Modal Dialog */}
-      <div className="relative bg-[#000054] border border-[#3D3DAD] rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col z-10 overflow-hidden transform transition-all">
+      <div className="relative bg-white border border-[#DEDCCF] rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col z-10 overflow-hidden transform transition-all">
         
         {/* Header */}
-        <div className="px-6 py-4 bg-[#000054] border-b border-[#3D3DAD] flex items-center justify-between">
+        <div className="px-6 py-4 bg-[#F5F5F0] border-b border-[#DEDCCF] flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {type === 'privacy' && <Shield className="w-5 h-5 text-[#3B82F6]" />}
-            {type === 'cookies' && <Info className="w-5 h-5 text-[#3B82F6]" />}
-            {type === 'terms' && <FileText className="w-5 h-5 text-[#3B82F6]" />}
-            <h2 className="font-sans font-extrabold text-[#F1F5F9] text-sm md:text-base leading-none">
+            {type === 'privacy' && <Shield className="w-5 h-5 text-[#5A5A40]" />}
+            {type === 'cookies' && <Info className="w-5 h-5 text-[#5A5A40]" />}
+            {type === 'terms' && <FileText className="w-5 h-5 text-[#5A5A40]" />}
+            <h2 className="font-sans font-extrabold text-[#1A1A1A] text-sm md:text-base leading-none">
               {getTitle()}
             </h2>
           </div>
           <button 
             onClick={onClose}
-            className="p-1.5 rounded-lg border border-[#3D3DAD] bg-[#000054] text-[#3B82F6] hover:bg-[#000054] transition cursor-pointer"
+            className="p-1.5 rounded-lg border border-[#DEDCCF] bg-white text-[#5A5A40] hover:bg-[#ECEBE4] transition cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -179,13 +179,13 @@ export default function PolicyModal({ isOpen, onClose, type, currentLanguage }: 
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3.5 bg-[#000054] border-t border-[#3D3DAD] flex items-center justify-between">
-          <span className="font-mono text-[9px] text-[#94A3B8]">
+        <div className="px-6 py-3.5 bg-[#F5F5F0] border-t border-[#DEDCCF] flex items-center justify-between">
+          <span className="font-mono text-[9px] text-[#8E8E80]">
             LAST UPDATED: JUNE 2026 ● © {currentYear} STARTUP FUNDING HUB
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-[#3B82F6] text-white hover:bg-[#2563EB] text-xs font-mono font-bold transition cursor-pointer"
+            className="px-4 py-1.5 rounded-lg bg-[#5A5A40] text-white hover:bg-[#4A4A30] text-xs font-mono font-bold transition cursor-pointer"
           >
             {t.acknowledge}
           </button>

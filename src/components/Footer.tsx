@@ -1,4 +1,4 @@
-import { Mail, Shield, ShieldAlert, Heart, Terminal, Cpu, Globe, ExternalLink } from 'lucide-react';
+import { Mail, Shield, Heart, Terminal, Cpu, Globe } from 'lucide-react';
 
 interface FooterProps {
   currentLanguage: string;
@@ -31,7 +31,7 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
   };
 
   return (
-    <footer id="app-footer" className="bg-[#4535D0] text-white border-t border-white/15 mt-12">
+    <footer id="app-footer" className="bg-[#5A5A40] text-white border-t border-[#4A4A30]/30 mt-12">
       <div className="max-w-[1536px] mx-auto px-6 py-12 md:py-16">
         {/* Main Grid Columns */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12">
@@ -39,16 +39,16 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
           {/* Column 1: Brand & About */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#000054] border border-[#000054]">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/20">
                 <Cpu className="w-4 h-4 text-white" />
               </div>
-              <span className="font-display italic font-bold text-xl tracking-tight text-white">Startup Funding Hub</span>
-              <span className="bg-[#000054] text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase border border-[#000054]">
+              <span className="font-display italic font-bold text-xl tracking-tight">Startup Funding Hub</span>
+              <span className="bg-white/15 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase border border-white/25">
                 IBM Granite
               </span>
             </div>
             
-            <p className="text-xs text-white/75 leading-relaxed font-sans max-w-md">
+            <p className="text-xs text-white/80 leading-relaxed font-sans max-w-md">
               {getAboutText()}
             </p>
           </div>
@@ -59,22 +59,22 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
               <Terminal className="w-3.5 h-3.5" />
               <span>SYSTEM ARCHITECTURE</span>
             </h4>
-            <div className="space-y-2 text-xs font-mono text-white">
-              <div className="flex items-center gap-2 bg-[#000054] px-3 py-2 rounded-lg border border-[#000054]">
-                <Globe className="w-3.5 h-3.5 text-[#14B8A6]" />
-                <span>NLU: <strong className="text-[#14B8A6]">Watson NLU Analysed</strong></span>
+            <div className="space-y-2 text-xs font-mono text-white/90">
+              <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                <Globe className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>NLU: <strong className="text-[#10B981]">Watson NLU Analysed</strong></span>
               </div>
-              <div className="flex items-center gap-2 bg-[#000054] px-3 py-2 rounded-lg border border-[#000054]">
-                <Cpu className="w-3.5 h-3.5 text-[#14B8A6]" />
-                <span>LLM Backend: <strong className="text-[#14B8A6]">Granite-4-H-Small</strong></span>
+              <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                <Cpu className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>LLM Backend: <strong className="text-[#10B981]">Granite-4-H-Small</strong></span>
               </div>
-              <div className="flex items-center gap-2 bg-[#000054] px-3 py-2 rounded-lg border border-[#000054]">
-                <Terminal className="w-3.5 h-3.5 text-[#14B8A6]" />
-                <span>Agent Layer: <strong className="text-[#14B8A6]">Watsonx Orchestrate Ready</strong></span>
+              <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                <Terminal className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>Agent Layer: <strong className="text-[#10B981]">Watsonx Orchestrate Ready</strong></span>
               </div>
-              <div className="flex items-center gap-2 bg-[#000054] px-3 py-2 rounded-lg border border-[#000054]">
-                <Shield className="w-3.5 h-3.5 text-[#14B8A6]" />
-                <span>Guardrail: <strong className="text-[#14B8A6]">Compliance Layer Active</strong></span>
+              <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
+                <Shield className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>Guardrail: <strong className="text-[#10B981]">Compliance Layer Active</strong></span>
               </div>
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
                   garv26arora@gmail.com
                 </a>
               </li>
-              <li className="pt-2 border-t border-white/15 text-white/75 leading-relaxed font-sans">
+              <li className="pt-2 border-t border-white/10 text-white/75 leading-relaxed font-sans">
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <span>Created by</span>
                   <strong className="text-white font-semibold">Garv Arora</strong>
@@ -106,7 +106,7 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
         </div>
 
         {/* Bottom Bar: Copyright and Links */}
-        <div className="pt-8 border-t border-white/15 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="text-[10px] font-mono text-white/60 tracking-wide">
             © {currentYear} STARTUP FUNDING HUB. DESIGNED & DEVELOPED BY <span className="text-white font-bold">GARV ARORA</span>.
           </div>

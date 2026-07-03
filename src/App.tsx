@@ -9,7 +9,7 @@ import ProposalGenerator from './components/ProposalGenerator';
 import Footer from './components/Footer';
 import PolicyModal from './components/PolicyModal';
 import CollapsibleFAQ from './components/CollapsibleFAQ';
-import { Search, Cpu, Sparkles, Database, FileText, Bot, HelpCircle, RefreshCw, Save, Star } from 'lucide-react';
+import { Search, Database, FileText, Bot, HelpCircle, RefreshCw, Save, Star } from 'lucide-react';
 import { TRANSLATIONS } from './locales/translations';
 
 export default function App() {
@@ -195,7 +195,7 @@ export default function App() {
   const displayedGrants = showFavoritesOnly ? grants.filter(g => favorites.includes(g.id)) : grants;
 
   return (
-    <div className="min-h-screen bg-[#4535D0] text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#F5F5F0] text-slate-800 flex flex-col font-sans">
       <Navbar currentLanguage={currentLanguage} onLanguageChange={setCurrentLanguage} />
 
       {/* Main Grid Layout */}
@@ -212,39 +212,39 @@ export default function App() {
                 setSaveSuccess(true);
                 setTimeout(() => setSaveSuccess(false), 3000);
               }}
-              className="w-full bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white hover:from-[#1D4ED8] hover:to-[#3B82F6] py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl font-semibold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] border border-[#2563EB]"
+              className="w-full bg-[#5A5A40] text-white hover:bg-[#4A4A30] py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl font-semibold text-xs uppercase tracking-wider transition cursor-pointer flex items-center justify-center gap-2 shadow-sm border border-[#4A4A30]"
             >
               <Save className="w-4 h-4" />
               <span>{saveSuccess ? t.saveSuccessText : t.saveContextBtn}</span>
             </button>
             {saveSuccess && (
-              <p className="text-[10px] text-[#14B8A6] font-semibold text-center font-mono animate-fadeIn">
+              <p className="text-[10px] text-[#10B981] font-semibold text-center font-mono animate-fadeIn">
                 {t.saveNotification}
               </p>
             )}
           </div>
           
           {/* Quick Real-time Metrics Dashboard */}
-          <div className="bg-gradient-to-br from-[#000054] to-[#000054] border border-[#3D3DAD] rounded-[24px] p-5 shadow-sm font-mono text-xs text-[#F1F5F9] transition-shadow duration-300 hover:shadow-md">
-            <h4 className="font-display font-semibold text-[#2563EB] mb-3 flex items-center gap-2 text-sm">
-              <Database className="w-4 h-4 text-[#3B82F6]" />
+          <div className="bg-[#ECEBE4] border border-[#DEDCCF] rounded-[24px] p-5 shadow-sm font-mono text-xs text-[#1A1A1A]">
+            <h4 className="font-display font-semibold text-[#4A4A30] mb-3 flex items-center gap-2 text-sm">
+              <Database className="w-4 h-4 text-[#5A5A40]" />
               {t.realtimeInsights}
             </h4>
             
             <div className="space-y-2.5">
-              <div className="flex justify-between items-center bg-[#000054] p-2.5 rounded-xl border border-[#3D3DAD] transition-all duration-200 hover:border-[#3B82F6]/40 hover:shadow-sm">
-                <span className="text-[#3B82F6] font-medium">{t.dpiitAge}</span>
-                <span className="text-[#F1F5F9] font-bold">
+              <div className="flex justify-between items-center bg-white p-2.5 rounded-xl border border-[#DEDCCF]">
+                <span className="text-[#5A5A40] font-medium">{t.dpiitAge}</span>
+                <span className="text-[#1A1A1A] font-bold">
                   {new Date().getFullYear() - profile.incorporationYear} {t.yearsSuffix}
                 </span>
               </div>
-              <div className="flex justify-between items-center bg-[#000054] p-2.5 rounded-xl border border-[#3D3DAD] transition-all duration-200 hover:border-[#3B82F6]/40 hover:shadow-sm">
-                <span className="text-[#3B82F6] font-medium">{t.totalSchemes}</span>
-                <span className="text-[#3B82F6] font-bold">{GRANTS.length} {t.authenticatedLabel}</span>
+              <div className="flex justify-between items-center bg-white p-2.5 rounded-xl border border-[#DEDCCF]">
+                <span className="text-[#5A5A40] font-medium">{t.totalSchemes}</span>
+                <span className="text-[#5A5A40] font-bold">{GRANTS.length} {t.authenticatedLabel}</span>
               </div>
-              <div className="flex justify-between items-center bg-[#000054] p-2.5 rounded-xl border border-[#3D3DAD] transition-all duration-200 hover:border-[#3B82F6]/40 hover:shadow-sm">
-                <span className="text-[#3B82F6] font-medium">{t.topMatch}</span>
-                <span className="text-[#14B8A6] font-bold">
+              <div className="flex justify-between items-center bg-white p-2.5 rounded-xl border border-[#DEDCCF]">
+                <span className="text-[#5A5A40] font-medium">{t.topMatch}</span>
+                <span className="text-[#10B981] font-bold">
                   {grants.length > 0 && matchScores[grants[0].id] ? `${matchScores[grants[0].id].score}% ${t.matchLabel}` : 'N/A'}
                 </span>
               </div>
@@ -256,13 +256,13 @@ export default function App() {
         <div className="lg:col-span-7 flex flex-col gap-6 lg:self-start">
           
           {/* Navigation Tabs */}
-          <div className="bg-[#000054] border border-[#3D3DAD] rounded-2xl p-1 flex sm:p-1.5 gap-1 shadow-sm relative">
+          <div className="bg-[#ECEBE4] border border-[#DEDCCF] rounded-2xl p-1 flex sm:p-1.5 gap-1 shadow-sm relative">
             <button
               onClick={() => setActiveTab('assistant')}
               className={`flex-1 py-2 sm:py-3 px-1 sm:px-4 rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                 activeTab === 'assistant'
-                  ? 'bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white shadow-md scale-[1.02]'
-                  : 'text-[#3B82F6] hover:text-[#F1F5F9] hover:bg-[#3B4568] hover:scale-[1.01]'
+                  ? 'bg-[#5A5A40] text-white shadow-sm hover:bg-[#4A4A30]'
+                  : 'text-[#5A5A40] hover:text-[#1A1A1A] hover:bg-[#D4D2C5]'
               }`}
             >
               <Bot className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
@@ -274,8 +274,8 @@ export default function App() {
               onClick={() => setActiveTab('browse')}
               className={`flex-1 py-2 sm:py-3 px-1 sm:px-4 rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-200 cursor-pointer ${
                 activeTab === 'browse'
-                  ? 'bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white shadow-md scale-[1.02]'
-                  : 'text-[#3B82F6] hover:text-[#F1F5F9] hover:bg-[#3B4568] hover:scale-[1.01]'
+                  ? 'bg-[#5A5A40] text-white shadow-sm hover:bg-[#4A4A30]'
+                  : 'text-[#5A5A40] hover:text-[#1A1A1A] hover:bg-[#D4D2C5]'
               }`}
             >
               <Database className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
@@ -287,8 +287,8 @@ export default function App() {
               onClick={() => setActiveTab('proposal')}
               className={`flex-1 py-2 sm:py-3 px-1 sm:px-4 rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-wider transition-all duration-200 relative cursor-pointer ${
                 activeTab === 'proposal'
-                  ? 'bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white shadow-md scale-[1.02]'
-                  : 'text-[#3B82F6] hover:text-[#F1F5F9] hover:bg-[#3B4568] hover:scale-[1.01]'
+                  ? 'bg-[#5A5A40] text-white shadow-sm hover:bg-[#4A4A30]'
+                  : 'text-[#5A5A40] hover:text-[#1A1A1A] hover:bg-[#D4D2C5]'
               }`}
             >
               <FileText className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
@@ -322,12 +322,12 @@ export default function App() {
               <div className="space-y-6">
                 
                 {/* Search & Smart Filter Bar */}
-                <div className="bg-[#000054] border border-[#3D3DAD] rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col gap-3">
+                <div className="bg-white border border-[#DEDCCF] rounded-2xl p-4 shadow-sm flex flex-col gap-3">
                   <div className="relative">
-                    <Search className="w-4 h-4 text-[#3B82F6] absolute left-3.5 top-3.5" />
+                    <Search className="w-4 h-4 text-[#5A5A40] absolute left-3.5 top-3.5" />
                     <input
                       type="text"
-                      className="w-full bg-[#000054] text-[#F1F5F9] text-xs pl-10 pr-4 py-3 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 transition-all"
+                      className="w-full bg-[#F5F5F0] text-[#1A1A1A] text-xs pl-10 pr-4 py-3 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition"
                       placeholder={t.searchPlaceholder || "Search schemes — e.g. biotech, NIDHI, women..."}
                       value={q}
                       onChange={(e) => setQ(e.target.value)}
@@ -336,17 +336,17 @@ export default function App() {
 
                   {/* Watson NLU Live Metadata */}
                   {nluMetadata && nluMetadata.keywords && nluMetadata.keywords.length > 0 && (
-                    <div className="bg-[#000054] border border-[#3D3DAD] rounded-xl px-3.5 py-2.5 text-xs text-[#3B82F6] flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
+                    <div className="bg-[#F0F0E8] border border-[#DEDCCF] rounded-xl px-3.5 py-2.5 text-xs text-[#5A5A40] flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
                       <div className="flex flex-wrap items-center gap-1.5">
-                        <span className="font-mono font-bold text-[9px] uppercase tracking-wider bg-[#3B82F6] text-white px-1.5 py-0.5 rounded">
+                        <span className="font-mono font-bold text-[9px] uppercase tracking-wider bg-[#5A5A40] text-white px-1.5 py-0.5 rounded">
                           IBM Watson NLU
                         </span>
-                        <span className="font-semibold text-[#2563EB]">
+                        <span className="font-semibold text-[#4A4A30]">
                           {t.parsedConcepts}
                         </span>
                         <div className="flex flex-wrap gap-1">
                           {nluMetadata.keywords.slice(0, 4).map((kw: any, idx: number) => (
-                            <span key={idx} className="bg-[#000054] px-2 py-0.5 rounded border border-[#3D3DAD] text-[#2563EB] font-mono text-[10px] font-bold">
+                            <span key={idx} className="bg-white px-2 py-0.5 rounded border border-[#DEDCCF] text-[#4A4A30] font-mono text-[10px] font-bold">
                               {kw.text}
                             </span>
                           ))}
@@ -358,7 +358,7 @@ export default function App() {
                         </span>
                         <span className={`px-2 py-0.5 rounded text-white ${
                           nluMetadata.sentiment.score > 0.1 
-                            ? 'bg-[#14B8A6]' 
+                            ? 'bg-[#10B981]' 
                             : nluMetadata.sentiment.score < -0.1 
                               ? 'bg-rose-500' 
                               : 'bg-slate-500'
@@ -373,7 +373,7 @@ export default function App() {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                       <select
-                        className="w-full bg-[#000054] text-[#F1F5F9] text-xs px-3 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 hover:border-[#3B82F6]/50 transition-all cursor-pointer"
+                        className="w-full bg-[#F5F5F0] text-[#1A1A1A] text-xs px-3 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40]"
                         value={stageFilter}
                         onChange={(e) => setStageFilter(e.target.value)}
                       >
@@ -385,7 +385,7 @@ export default function App() {
 
                     <div>
                       <select
-                        className="w-full bg-[#000054] text-[#F1F5F9] text-xs px-3 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 hover:border-[#3B82F6]/50 transition-all cursor-pointer"
+                        className="w-full bg-[#F5F5F0] text-[#1A1A1A] text-xs px-3 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40]"
                         value={domainFilter}
                         onChange={(e) => setDomainFilter(e.target.value)}
                       >
@@ -397,7 +397,7 @@ export default function App() {
 
                     <div>
                       <select
-                        className="w-full bg-[#000054] text-[#F1F5F9] text-xs px-3 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] focus:ring-2 focus:ring-[#3B82F6]/20 hover:border-[#3B82F6]/50 transition-all cursor-pointer"
+                        className="w-full bg-[#F5F5F0] text-[#1A1A1A] text-xs px-3 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40]"
                         value={minAmountFilter}
                         onChange={(e) => setMinAmountFilter(Number(e.target.value))}
                       >
@@ -409,22 +409,22 @@ export default function App() {
                   </div>
 
                   {/* Bookmark Favorites Only Toggle Pill */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-[#3D3DAD]/50">
+                  <div className="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-[#DEDCCF]/50">
                     <button
                       type="button"
                       onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border text-[11px] font-mono font-bold transition-all duration-200 cursor-pointer hover:scale-[1.03] active:scale-[0.97] ${
+                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border text-[11px] font-mono font-bold transition-all duration-200 cursor-pointer ${
                         showFavoritesOnly 
-                          ? 'bg-gradient-to-r from-amber-500 to-amber-400 border-amber-600 text-white shadow-sm hover:shadow-md' 
-                          : 'bg-[#000054] border-[#3D3DAD] text-[#3B82F6] hover:bg-[#000054] hover:text-[#2563EB]'
+                          ? 'bg-amber-500 border-amber-600 text-white shadow-sm hover:bg-amber-600' 
+                          : 'bg-[#F5F5F0] border-[#DEDCCF] text-[#5A5A40] hover:bg-[#ECEBE4] hover:text-[#4A4A30]'
                       }`}
                     >
-                      <Star className={`w-3.5 h-3.5 ${showFavoritesOnly ? 'fill-white text-white animate-pulse' : 'text-[#94A3B8]'}`} />
+                      <Star className={`w-3.5 h-3.5 ${showFavoritesOnly ? 'fill-white text-white animate-pulse' : 'text-[#8E8E80]'}`} />
                       <span>
                         {showFavoritesOnly ? t.showAllSchemes : t.showFavoritesOnly}
                       </span>
                     </button>
-                    <span className="text-[10px] font-mono font-semibold text-[#94A3B8]">
+                    <span className="text-[10px] font-mono font-semibold text-[#8E8E80]">
                       {`${displayedGrants.length} ${t.schemesDisplayedSuffix}`}
                     </span>
                   </div>
@@ -433,8 +433,8 @@ export default function App() {
                 {/* Grants List Grid */}
                 {loadingGrants ? (
                   <div className="py-20 flex justify-center items-center gap-3">
-                    <RefreshCw className="w-6 h-6 text-[#3B82F6] animate-spin" />
-                    <span className="text-[#94A3B8] text-sm font-mono">
+                    <RefreshCw className="w-6 h-6 text-[#5A5A40] animate-spin" />
+                    <span className="text-[#8E8E80] text-sm font-mono">
                       {t.runningQuery}
                     </span>
                   </div>
@@ -462,14 +462,14 @@ export default function App() {
                       ))}
                   </div>
                 ) : (
-                  <div className="bg-[#000054] border border-[#3D3DAD] rounded-2xl py-20 px-6 text-center shadow-sm">
-                    <HelpCircle className="w-12 h-12 text-[#94A3B8] mx-auto mb-3" />
-                    <p className="text-sm font-semibold text-[#2563EB]">
+                  <div className="bg-white border border-[#DEDCCF] rounded-2xl py-20 px-6 text-center shadow-sm">
+                    <HelpCircle className="w-12 h-12 text-[#8E8E80] mx-auto mb-3" />
+                    <p className="text-sm font-semibold text-[#4A4A30]">
                       {showFavoritesOnly
                         ? t.noGrantsBookmarked
                         : t.noMatchingGrants}
                     </p>
-                    <p className="text-xs text-[#94A3B8] max-w-sm mx-auto mt-1 leading-normal">
+                    <p className="text-xs text-[#8E8E80] max-w-sm mx-auto mt-1 leading-normal">
                       {showFavoritesOnly
                         ? t.favoritesHint
                         : t.relaxFiltersHint}

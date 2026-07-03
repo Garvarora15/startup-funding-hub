@@ -25,21 +25,21 @@ export default function Navbar({ currentLanguage, onLanguageChange }: NavbarProp
   ];
 
   return (
-    <nav className="bg-[#4535D0] border-b border-white/15 py-3.5 px-6 flex justify-between items-center relative z-10 flex-wrap gap-4">
+    <nav className="bg-[#5A5A40] border-b border-[#4A4A30]/30 py-3.5 px-6 flex justify-between items-center relative z-10 shadow-sm flex-wrap gap-4">
       <div className="flex items-center gap-3">
-        <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-[#000054] border border-[#000054] shadow-sm transition-transform duration-300 hover:scale-110 hover:rotate-3">
+        <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 border border-white/20 shadow-sm">
           <Cpu className="w-5 h-5 text-white" />
-          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#14B8A6] rounded-full border-2 border-[#4535D0] animate-ping" />
-          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#14B8A6] rounded-full border-2 border-[#4535D0]" />
+          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#10B981] rounded-full border-2 border-[#5A5A40] animate-ping" />
+          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#10B981] rounded-full border-2 border-[#5A5A40]" />
         </div>
         <div>
           <div className="flex items-center gap-2">
             <span className="font-display italic font-bold text-xl text-white tracking-tight">Startup Funding Hub</span>
-            <span className="bg-[#000054] text-white text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase border border-[#000054]">
+            <span className="bg-white/15 text-white text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase border border-white/25">
               IBM Granite
             </span>
           </div>
-          <p className="text-[10px] text-white/70 font-sans tracking-wide">
+          <p className="text-[10px] text-white/80 font-sans tracking-wide">
             Watsonx.ai Grant & Seed Funding Strategist
           </p>
         </div>
@@ -47,7 +47,7 @@ export default function Navbar({ currentLanguage, onLanguageChange }: NavbarProp
 
       <div className="flex items-center gap-4 text-xs font-mono">
         {/* Language Switcher */}
-        <div className="flex items-center gap-2 bg-[#000054] px-2 py-1 rounded-lg border border-[#000054] text-white transition-colors duration-200 hover:bg-[#3D3DAD]">
+        <div className="flex items-center gap-2 bg-white/10 px-2 py-1 rounded-lg border border-white/20 text-white">
           <Globe className="w-3.5 h-3.5 text-white/90" />
           <select
             value={currentLanguage}
@@ -55,30 +55,30 @@ export default function Navbar({ currentLanguage, onLanguageChange }: NavbarProp
             className="bg-transparent text-white border-none focus:outline-none focus:ring-0 text-xs font-sans cursor-pointer font-medium"
           >
             {languages.map((lang) => (
-              <option key={lang.value} value={lang.value} className="text-slate-100 bg-[#000054]">
+              <option key={lang.value} value={lang.value} className="text-stone-800 bg-white">
                 {lang.label}
               </option>
             ))}
           </select>
         </div>
 
-        <div className="hidden md:flex items-center gap-2 bg-[#000054] px-3 py-1.5 rounded-lg border border-[#000054] text-white transition-colors duration-200 hover:bg-[#3D3DAD]">
+        <div className="hidden md:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-white">
           <Clock className="w-3.5 h-3.5 text-white/90" />
           <span>
             {time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}
           </span>
         </div>
-        <div className="hidden md:flex items-center gap-2 bg-[#000054] px-3 py-1.5 rounded-lg border border-[#000054] text-white transition-colors duration-200 hover:bg-[#3D3DAD]">
-          <Wifi className="w-3.5 h-3.5 text-[#14B8A6] animate-pulse" />
-          <span>Watsonx LLM: <strong className="text-[#14B8A6]">ACTIVE</strong></span>
+        <div className="hidden md:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-white">
+          <Wifi className="w-3.5 h-3.5 text-[#10B981] animate-pulse" />
+          <span>Watsonx LLM: <strong className="text-[#10B981]">ACTIVE</strong></span>
         </div>
-        <div className="hidden lg:flex items-center gap-2 bg-[#000054] px-3 py-1.5 rounded-lg border border-[#000054] text-white transition-colors duration-200 hover:bg-[#3D3DAD]">
-          <Network className="w-3.5 h-3.5 text-[#14B8A6]" />
-          <span>Orchestrate: <strong className="text-[#14B8A6]">READY</strong></span>
+        <div className="hidden lg:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-white">
+          <Network className="w-3.5 h-3.5 text-[#10B981]" />
+          <span>Orchestrate: <strong className="text-[#10B981]">READY</strong></span>
         </div>
-        <div className="hidden lg:flex items-center gap-2 bg-[#000054] px-3 py-1.5 rounded-lg border border-[#000054] text-white transition-colors duration-200 hover:bg-[#3D3DAD]">
-          <Shield className="w-3.5 h-3.5 text-[#14B8A6]" />
-          <span>Guardrail: <strong className="text-[#14B8A6]">ACTIVE</strong></span>
+        <div className="hidden lg:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-white">
+          <Shield className="w-3.5 h-3.5 text-[#10B981]" />
+          <span>Guardrail: <strong className="text-[#10B981]">ACTIVE</strong></span>
         </div>
       </div>
     </nav>

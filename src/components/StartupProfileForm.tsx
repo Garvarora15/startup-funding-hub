@@ -166,22 +166,22 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
   const currentPresets = sectorPresets[profile.domain] || sectorPresets['any'];
 
   return (
-    <div className="bg-[#000054] border border-[#3D3DAD] rounded-[24px] p-6 shadow-sm relative text-[#F1F5F9] h-auto">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#3B82F6]/5 pointer-events-none" />
+    <div className="bg-[#ECEBE4] border border-[#DEDCCF] rounded-[24px] p-6 shadow-sm relative text-[#1A1A1A] h-auto">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[#5A5A40]/5 pointer-events-none" />
       
-      <div className="flex items-center gap-2 mb-6 pb-4 border-b border-[#3D3DAD]">
-        <Target className="w-5 h-5 text-[#3B82F6]" />
-        <h2 className="font-display font-semibold text-[#2563EB] text-base">{t.configHeader}</h2>
+      <div className="flex items-center gap-2 mb-6 pb-4 border-b border-[#DEDCCF]">
+        <Target className="w-5 h-5 text-[#5A5A40]" />
+        <h2 className="font-display font-semibold text-[#4A4A30] text-base">{t.configHeader}</h2>
       </div>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-xs font-semibold text-[#3B82F6] uppercase tracking-wider mb-2">
+          <label className="block text-xs font-semibold text-[#5A5A40] uppercase tracking-wider mb-2">
             {t.ventureNameLabel}
           </label>
           <input
             type="text"
-            className="w-full bg-[#000054] text-[#F1F5F9] text-sm px-4 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition placeholder:text-slate-500/60 placeholder:font-normal"
+            className="w-full bg-white text-[#1A1A1A] text-sm px-4 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition placeholder:text-stone-400/60 placeholder:font-normal"
             placeholder={t.ventureNamePlaceholder}
             value={profile.name}
             onChange={(e) => handleChange('name', e.target.value)}
@@ -190,11 +190,11 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-[#3B82F6] uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold text-[#5A5A40] uppercase tracking-wider mb-2">
               {t.primaryDomainLabel}
             </label>
             <select
-              className="w-full bg-[#000054] text-[#F1F5F9] text-sm px-3 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition appearance-none"
+              className="w-full bg-white text-[#1A1A1A] text-sm px-3 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition appearance-none"
               value={profile.domain}
               onChange={(e) => handleChange('domain', e.target.value)}
             >
@@ -205,11 +205,11 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#3B82F6] uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold text-[#5A5A40] uppercase tracking-wider mb-2">
               {t.devStageLabel}
             </label>
             <select
-              className="w-full bg-[#000054] text-[#F1F5F9] text-sm px-3 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition"
+              className="w-full bg-white text-[#1A1A1A] text-sm px-3 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition"
               value={profile.stage}
               onChange={(e) => handleChange('stage', e.target.value)}
             >
@@ -222,17 +222,17 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-[#3B82F6] uppercase tracking-wider mb-2 flex items-center gap-1">
+            <label className="block text-xs font-semibold text-[#5A5A40] uppercase tracking-wider mb-2 flex items-center gap-1">
               {t.incorporationYearLabel}
               <div className="group relative cursor-help">
-                <HelpCircle className="w-3.5 h-3.5 text-slate-400" />
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-48 bg-[#000054] text-slate-200 text-[10px] p-2 rounded-lg opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none z-20 border border-[#3D3DAD] font-normal shadow-md">
+                <HelpCircle className="w-3.5 h-3.5 text-slate-500" />
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-48 bg-white text-slate-700 text-[10px] p-2 rounded-lg opacity-0 group-hover:opacity-100 transition duration-200 pointer-events-none z-20 border border-[#DEDCCF] font-normal shadow-md">
                   {t.incorporationYearTooltip}
                 </span>
               </div>
             </label>
             <select
-              className="w-full bg-[#000054] text-[#F1F5F9] text-sm px-3 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition"
+              className="w-full bg-white text-[#1A1A1A] text-sm px-3 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition"
               value={profile.incorporationYear}
               onChange={(e) => handleChange('incorporationYear', parseInt(e.target.value))}
             >
@@ -243,12 +243,12 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#3B82F6] uppercase tracking-wider mb-2">
+            <label className="block text-xs font-semibold text-[#5A5A40] uppercase tracking-wider mb-2">
               {t.externalFundingLabel}
             </label>
             <input
               type="number"
-              className="w-full bg-[#000054] text-[#F1F5F9] text-sm px-4 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition placeholder:text-slate-500/60 placeholder:font-normal"
+              className="w-full bg-white text-[#1A1A1A] text-sm px-4 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition placeholder:text-stone-400/60 placeholder:font-normal"
               placeholder="e.g. 500000"
               value={profile.currentFunding === 0 ? '' : profile.currentFunding}
               onChange={(e) => handleChange('currentFunding', Number(e.target.value))}
@@ -257,12 +257,12 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-[#3B82F6] uppercase tracking-wider mb-2">
+          <label className="block text-xs font-semibold text-[#5A5A40] uppercase tracking-wider mb-2">
             {t.locationLabel}
           </label>
           <input
             type="text"
-            className="w-full bg-[#000054] text-[#F1F5F9] text-sm px-4 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition placeholder:text-slate-500/60 placeholder:font-normal"
+            className="w-full bg-white text-[#1A1A1A] text-sm px-4 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition placeholder:text-stone-400/60 placeholder:font-normal"
             placeholder={t.locationPlaceholder}
             value={profile.location}
             onChange={(e) => handleChange('location', e.target.value)}
@@ -270,21 +270,21 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
         </div>
 
         {/* Pitch Customization Options */}
-        <div className="bg-[#000054] border border-[#3D3DAD] rounded-xl p-3 space-y-3">
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#3B82F6] uppercase tracking-wider">
-            <Sparkles className="w-3 h-3 text-[#3B82F6]" />
+        <div className="bg-[#FAF9F5] border border-[#DEDCCF] rounded-xl p-3 space-y-3">
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#5A5A40] uppercase tracking-wider">
+            <Sparkles className="w-3 h-3 text-[#5A5A40]" />
             <span>
               {t.aiPitchSettings}
             </span>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <div>
-              <label className="block text-[9px] font-semibold text-[#3B82F6] uppercase tracking-wider mb-1">
+              <label className="block text-[9px] font-semibold text-[#5A5A40] uppercase tracking-wider mb-1">
                 {t.formatLabel}
               </label>
               <select
-                className="w-full bg-[#000054] text-[#F1F5F9] text-xs px-2 py-1.5 rounded-lg border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition"
+                className="w-full bg-white text-[#1A1A1A] text-xs px-2 py-1.5 rounded-lg border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition"
                 value={profile.pitchFormat || 'elevator'}
                 onChange={(e) => handleChange('pitchFormat', e.target.value)}
               >
@@ -295,11 +295,26 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
             </div>
 
             <div>
-              <label className="block text-[9px] font-semibold text-[#3B82F6] uppercase tracking-wider mb-1">
+              <label className="block text-[9px] font-semibold text-[#5A5A40] uppercase tracking-wider mb-1">
+                {t.pitchLanguageLabel}
+              </label>
+              <select
+                className="w-full bg-white text-[#1A1A1A] text-xs px-2 py-1.5 rounded-lg border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition"
+                value={profile.pitchLanguage || 'english'}
+                onChange={(e) => handleChange('pitchLanguage', e.target.value)}
+              >
+                {pitchLanguages.map(l => (
+                  <option key={l.value} value={l.value}>{l.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[9px] font-semibold text-[#5A5A40] uppercase tracking-wider mb-1">
                 {t.updateFrequency}
               </label>
               <select
-                className="w-full bg-[#000054] text-[#F1F5F9] text-xs px-2 py-1.5 rounded-lg border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition"
+                className="w-full bg-white text-[#1A1A1A] text-xs px-2 py-1.5 rounded-lg border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition"
                 value={profile.updateFrequency || 'on-demand'}
                 onChange={(e) => handleChange('updateFrequency', e.target.value)}
               >
@@ -313,14 +328,14 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
 
         <div>
           <div className="flex justify-between items-center mb-2">
-            <label className="block text-xs font-semibold text-[#3B82F6] uppercase tracking-wider">
+            <label className="block text-xs font-semibold text-[#5A5A40] uppercase tracking-wider">
               {t.pitchLabel}
             </label>
             <button
               type="button"
               onClick={handleGenerateAIPitch}
               disabled={generating || !profile.name}
-              className="flex items-center gap-1.5 text-[10px] bg-[#3B82F6] hover:bg-[#2563EB] text-white px-2 py-1 rounded-lg font-bold tracking-wide uppercase transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              className="flex items-center gap-1.5 text-[10px] bg-[#5A5A40] hover:bg-[#4A4A30] text-white px-2 py-1 rounded-lg font-bold tracking-wide uppercase transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
               title="Generate professional pitch using IBM Watsonx"
             >
               {generating ? (
@@ -332,7 +347,7 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
             </button>
           </div>
           <textarea
-            className="w-full bg-[#000054] text-[#F1F5F9] text-sm px-4 py-2.5 rounded-xl border border-[#3D3DAD] focus:outline-none focus:border-[#3B82F6] transition resize-none h-40 placeholder:text-slate-500/60 placeholder:font-normal"
+            className="w-full bg-white text-[#1A1A1A] text-sm px-4 py-2.5 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition resize-none h-40 placeholder:text-stone-400/60 placeholder:font-normal"
             placeholder={t.pitchPlaceholder}
             value={profile.description}
             onChange={(e) => handleChange('description', e.target.value)}
@@ -340,7 +355,7 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
 
           {/* Presets segment */}
           <div className="mt-3">
-            <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider block mb-1.5 flex items-center gap-1">
+            <span className="text-[10px] text-stone-500 font-semibold uppercase tracking-wider block mb-1.5 flex items-center gap-1">
               <Lightbulb className="w-3 h-3 text-amber-500" /> {t.chooseSectorTemplate}
             </span>
             <div className="space-y-1.5">
@@ -349,7 +364,7 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
                    key={index}
                   type="button"
                   onClick={() => handleChange('description', preset)}
-                  className="w-full text-left bg-white/75 hover:bg-[#000054] text-[10.5px] text-[#2563EB] p-2 rounded-lg border border-[#3D3DAD] hover:border-[#3B82F6] transition cursor-pointer leading-relaxed font-mono shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
+                  className="w-full text-left bg-white/75 hover:bg-white text-[10.5px] text-[#4A4A30] p-2 rounded-lg border border-[#DEDCCF] hover:border-[#5A5A40] transition cursor-pointer leading-relaxed font-mono shadow-[0_1px_2px_rgba(0,0,0,0.02)]"
                   title={preset}
                 >
                   {preset}

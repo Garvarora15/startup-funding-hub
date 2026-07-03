@@ -90,6 +90,7 @@ export interface LocaleStrings {
   authenticatedLabel: string;
   aiPitchSettings: string;
   formatLabel: string;
+  pitchLanguageLabel: string;
   formatElevator: string;
   formatOnePager: string;
   formatInvestor: string;
@@ -240,6 +241,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     authenticatedLabel: "Authenticated",
     aiPitchSettings: "AI Pitch Settings",
     formatLabel: "Format",
+    pitchLanguageLabel: "Pitch Language",
     formatElevator: "Elevator Pitch (2-sentence)",
     formatOnePager: "One-Pager Summary (Bullet points)",
     formatInvestor: "Investor Deck Hook",
@@ -388,6 +390,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     authenticatedLabel: "सत्यापित",
     aiPitchSettings: "एआई पिच सेटिंग्स",
     formatLabel: "प्रारूप",
+    pitchLanguageLabel: "पिच की भाषा",
     formatElevator: "एलिवेटर पिच (2-वाक्य)",
     formatOnePager: "वन-पेजर सारांश (बुलेट पॉइंट्स)",
     formatInvestor: "इन्वेस्टर डेक हुक",
@@ -536,6 +539,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     authenticatedLabel: "ਪ੍ਰਮਾਣਿਤ",
     aiPitchSettings: "AI ਪਿੱਚ ਸੈਟਿੰਗਾਂ",
     formatLabel: "ਫਾਰਮੈਟ",
+    pitchLanguageLabel: "ਪਿੱਚ ਦੀ ਭਾਸ਼ਾ",
     formatElevator: "ਐਲੀਵੇਟਰ ਪਿੱਚ (2-ਵਾਕ)",
     formatOnePager: "ਵਨ-ਪੇਜਰ ਸੰਖੇਪ (ਬੁਲੇਟ ਪੌਇੰਟਸ)",
     formatInvestor: "ਇਨਵੈਸਟਰ ਡੈਕ ਹੁੱਕ",
@@ -684,6 +688,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     authenticatedLabel: "Autenticado",
     aiPitchSettings: "Configuración de Pitch IA",
     formatLabel: "Formato",
+    pitchLanguageLabel: "Idioma del Pitch",
     formatElevator: "Pitch Rápido (2 oraciones)",
     formatOnePager: "Resumen de Una Página (Viñetas)",
     formatInvestor: "Gancho para Inversores",
@@ -832,6 +837,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     authenticatedLabel: "Authentifié",
     aiPitchSettings: "Paramètres de Pitch IA",
     formatLabel: "Format",
+    pitchLanguageLabel: "Langue du Pitch",
     formatElevator: "Pitch Rapide (2 phrases)",
     formatOnePager: "Résumé d'une Page (Puces)",
     formatInvestor: "Accroche pour Investisseurs",
@@ -980,6 +986,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     authenticatedLabel: "Authentifiziert",
     aiPitchSettings: "KI-Pitch-Einstellungen",
     formatLabel: "Format",
+    pitchLanguageLabel: "Pitch-Sprache",
     formatElevator: "Kurzpitch (2 Sätze)",
     formatOnePager: "Ein-Seiten-Zusammenfassung (Aufzählungspunkte)",
     formatInvestor: "Investoren-Aufhänger",
@@ -1128,6 +1135,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     authenticatedLabel: "認証済み",
     aiPitchSettings: "AIピッチ設定",
     formatLabel: "形式",
+    pitchLanguageLabel: "ピッチの言語",
     formatElevator: "エレベーターピッチ（2文）",
     formatOnePager: "ワンページ要約（箇条書き）",
     formatInvestor: "投資家向けフック",
