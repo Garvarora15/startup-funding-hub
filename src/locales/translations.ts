@@ -49,6 +49,7 @@ export interface LocaleStrings {
   domainMobility: string;
   domainEcommerce: string;
   domainGaming: string;
+  domainLogistics: string;
   fundingLimitAny: string;
   runningQuery: string;
   noGrantsFound: string;
@@ -136,6 +137,7 @@ export interface LocaleStrings {
   reasoningMonitor: string;
   suggestedQueries: string;
   listeningPlaceholder: string;
+  syncingPlaceholder: string;
   promptSeedFunds: string;
   promptSisfsEligibility: string;
   promptBiracApply: string;
@@ -200,6 +202,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     domainMobility: "EV & Mobility",
     domainEcommerce: "D2C & E-commerce",
     domainGaming: "Gaming, AVGC & Media",
+    domainLogistics: "Logistics & Trucking",
     fundingLimitAny: "Any Funding Limit",
     runningQuery: "Running full database index query...",
     noGrantsFound: "No matched schemes found. Try relaxing your filters.",
@@ -287,6 +290,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     reasoningMonitor: "IBM Granite Reasoning Monitor",
     suggestedQueries: "Suggested Queries",
     listeningPlaceholder: "Listening... Speak now",
+    syncingPlaceholder: "Syncing your voice input...",
     promptSeedFunds: "Seed funds with ₹25L+ limits",
     promptSisfsEligibility: "Check my SISFS eligibility",
     promptBiracApply: "How to apply for BIRAC grants?",
@@ -349,6 +353,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     domainMobility: "ईवी और मोबिलिटी",
     domainEcommerce: "डी2सी और ई-कॉमर्स",
     domainGaming: "गेमिंग और मीडिया",
+    domainLogistics: "रसद और ट्रकिंग",
     fundingLimitAny: "कोई भी फंडिंग सीमा",
     runningQuery: "पूर्ण डेटाबेस इंडेक्स क्वेरी चल रही है...",
     noGrantsFound: "कोई मेल खाने वाली योजना नहीं मिली। फ़िल्टर ढीला करें।",
@@ -436,6 +441,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     reasoningMonitor: "IBM ग्रेनाइट रीजनिंग मॉनिटर",
     suggestedQueries: "सुझाए गए प्रश्न",
     listeningPlaceholder: "सुन रहा हूँ... बोलें",
+    syncingPlaceholder: "आपकी आवाज़ सिंक हो रही है...",
     promptSeedFunds: "₹25L+ सीमा के साथ सीड फंड",
     promptSisfsEligibility: "SISFS के लिए पात्रता जांचें",
     promptBiracApply: "BIRAC के लिए कैसे आवेदन करें?",
@@ -498,6 +504,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     domainMobility: "ਈਵੀ ਅਤੇ ਮੋਬਿਲਿਟੀ",
     domainEcommerce: "ਡੀ2ਸੀ ਅਤੇ ਈ-ਕਾਮਰਸ",
     domainGaming: "ਗੇਮਿੰਗ ਅਤੇ ਮੀਡੀਆ",
+    domainLogistics: "ਲੌਜਿਸਟਿਕਸ ਅਤੇ ਟਰੱਕਿੰਗ",
     fundingLimitAny: "ਕੋਈ ਵੀ ਫੰਡਿੰਗ ਸੀਮਾ",
     runningQuery: "ਪੂਰੀ ਡਾਟਾਬੇਸ ਇੰਡੈਕਸ ਕਵੇਰੀ ਚੱਲ ਰਹੀ ਹੈ...",
     noGrantsFound: "ਕੋਈ ਮੇਲ ਖਾਂਦੀ ਯੋਜਨਾ ਨਹੀਂ ਮਿਲੀ। ਫਿਲਟਰ ਬਦਲੋ।",
@@ -585,6 +592,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     reasoningMonitor: "IBM ਗ੍ਰੇਨਾਈਟ ਰੀਜ਼ਨਿੰਗ ਮਾਨੀਟਰ",
     suggestedQueries: "ਸੁਝਾਏ ਗਏ ਪ੍ਰਸ਼ਨ",
     listeningPlaceholder: "ਸੁਣ ਰਿਹਾ ਹਾਂ... ਬੋਲੋ",
+    syncingPlaceholder: "ਤੁਹਾਡੀ ਆਵਾਜ਼ ਸਿੰਕ ਹੋ ਰਹੀ ਹੈ...",
     promptSeedFunds: "₹25L+ ਸੀਮਾ ਦੇ ਨਾਲ ਸੀਡ ਫੰਡ",
     promptSisfsEligibility: "SISFS ਲਈ ਯੋਗਤਾ ਜਾਂਚੋ",
     promptBiracApply: "BIRAC ਲਈ ਕਿਵੇਂ ਅਰਜ਼ੀ ਦੇਣੀ ਹੈ?",
@@ -647,6 +655,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     domainMobility: "VE y Movilidad",
     domainEcommerce: "D2C y Comercio Electrónico",
     domainGaming: "Videojuegos y Medios",
+    domainLogistics: "Logística y Transporte",
     fundingLimitAny: "Cualquier Límite",
     runningQuery: "Consultando la base de datos...",
     noGrantsFound: "No se encontraron esquemas. Intenta relajar los filtros.",
@@ -734,6 +743,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     reasoningMonitor: "Monitor de Razonamiento IBM Granite",
     suggestedQueries: "Consultas Sugeridas",
     listeningPlaceholder: "Escuchando... Habla ahora",
+    syncingPlaceholder: "Sincronizando tu voz...",
     promptSeedFunds: "Fondos semilla con límites de ₹25L+",
     promptSisfsEligibility: "Verificar mi elegibilidad SISFS",
     promptBiracApply: "¿Cómo aplicar a las subvenciones BIRAC?",
@@ -796,6 +806,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     domainMobility: "VE & Mobilité",
     domainEcommerce: "D2C & E-commerce",
     domainGaming: "Jeux Vidéo & Médias",
+    domainLogistics: "Logistique & Transport routier",
     fundingLimitAny: "Aucun Limite",
     runningQuery: "Recherche dans la base de données...",
     noGrantsFound: "Aucun programme trouvé. Essayez d'élargir les filtres.",
@@ -883,6 +894,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     reasoningMonitor: "Moniteur de Raisonnement IBM Granite",
     suggestedQueries: "Requêtes Suggérées",
     listeningPlaceholder: "Écoute en cours... Parlez maintenant",
+    syncingPlaceholder: "Synchronisation de votre voix...",
     promptSeedFunds: "Fonds d'amorçage avec limites de ₹25L+",
     promptSisfsEligibility: "Vérifier mon éligibilité SISFS",
     promptBiracApply: "Comment postuler aux subventions BIRAC ?",
@@ -945,6 +957,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     domainMobility: "E-Mobilität",
     domainEcommerce: "D2C & E-Commerce",
     domainGaming: "Gaming & Medien",
+    domainLogistics: "Logistik & Spedition",
     fundingLimitAny: "Beliebiges Limit",
     runningQuery: "Abfrage der Datenbank...",
     noGrantsFound: "Keine übereinstimmenden Programme gefunden.",
@@ -1032,6 +1045,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     reasoningMonitor: "IBM Granite Reasoning-Monitor",
     suggestedQueries: "Vorgeschlagene Anfragen",
     listeningPlaceholder: "Höre zu... Jetzt sprechen",
+    syncingPlaceholder: "Deine Stimme wird synchronisiert...",
     promptSeedFunds: "Seed-Fonds mit ₹25L+ Limits",
     promptSisfsEligibility: "Meine SISFS-Berechtigung prüfen",
     promptBiracApply: "Wie bewerbe ich mich für BIRAC-Förderungen?",
@@ -1094,6 +1108,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     domainMobility: "EV・モビリティ",
     domainEcommerce: "D2C・Eコマース",
     domainGaming: "ゲーミング・メディア",
+    domainLogistics: "物流・トラック輸送",
     fundingLimitAny: "上限なし",
     runningQuery: "データベースを検索中...",
     noGrantsFound: "該当するプログラムが見つかりませんでした。",
@@ -1181,6 +1196,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     reasoningMonitor: "IBM Granite推論モニター",
     suggestedQueries: "推奨される質問",
     listeningPlaceholder: "聞いています...話してください",
+    syncingPlaceholder: "音声を同期しています...",
     promptSeedFunds: "₹25万ルピー以上のシードファンド",
     promptSisfsEligibility: "SISFSの資格を確認する",
     promptBiracApply: "BIRAC助成金への申請方法は？",

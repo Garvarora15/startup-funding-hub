@@ -126,6 +126,7 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
     { value: 'mobility', label: t.domainMobility },
     { value: 'ecommerce', label: t.domainEcommerce },
     { value: 'gaming', label: t.domainGaming },
+    { value: 'logistics', label: t.domainLogistics },
   ];
 
   const stages = [

@@ -117,7 +117,8 @@ export default function App() {
     { value: 'spacetech', label: t.domainSpacetech || 'Space Technology' },
     { value: 'mobility', label: t.domainMobility || 'EV & Mobility' },
     { value: 'ecommerce', label: t.domainEcommerce || 'D2C & E-commerce' },
-    { value: 'gaming', label: t.domainGaming || 'Gaming, AVGC & Media' }
+    { value: 'gaming', label: t.domainGaming || 'Gaming, AVGC & Media' },
+    { value: 'logistics', label: t.domainLogistics || 'Logistics & Trucking' }
   ];
 
   const minAmountOptions = [

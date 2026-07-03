@@ -36,7 +36,7 @@
 
 The app connects to **IBM Watsonx.ai** using the `ibm/granite-4-h-small` model to power a multilingual AI funding strategist, eligibility scoring engine, pitch generator, and proposal drafter — all in one place.
 
-🔗 **Live Demo:** [startup-funding-zeta.vercel.app](https://startup-funding-zeta.vercel.app)
+🔗 **Live Demo:** [startup-funding-zeta.vercel.app](https://startup-funding-hub.vercel.app)
 📦 **Repository:** [github.com/Garvarora15/startup-funding](https://github.com/Garvarora15/startup-funding)
 
 ---
@@ -46,7 +46,7 @@ The app connects to **IBM Watsonx.ai** using the `ibm/granite-4-h-small` model t
 | # | Feature | Description |
 |---|---------|-------------|
 | 1 | 🤖 **AI Chat Agent** | IBM Granite-powered grant strategist — answers funding queries in 7 languages with real-time Watsonx.ai responses |
-| 2 | 🔍 **Smart Grant Search** | Browse & filter 66+ live Indian startup grants (SISFS, BIRAC, DST, DPIIT, NASSCOM, and more) |
+| 2 | 🔍 **Smart Grant Search** | Browse & filter 84 live Indian startup grants (SISFS, BIRAC, DST, DPIIT, NASSCOM, and more) |
 | 3 | 📊 **Match Score Engine** | Dynamic 0–100% eligibility scoring per grant based on your startup profile (sector, stage, location, funding) |
 | 4 | 📝 **Proposal Generator** | AI-drafted 6-section professional grant proposals tailored per scheme with rendered markdown tables |
 | 5 | 🎤 **Pitch Generator** | Elevator, one-pager, investor-hook, and Twitter pitches auto-generated in 7 languages |
@@ -109,7 +109,7 @@ startup-funding/
 │   │   ├── ProposalGenerator.tsx         # Draft tab with markdown table rendering
 │   │   └── StartupProfileForm.tsx        # Left panel profile form
 │   ├── data/
-│   │   └── grants.ts                     # 66+ curated Indian startup grants
+│   │   └── grants.ts                     # 84 curated Indian startup grants
 │   ├── locales/
 │   │   └── translations.ts               # 7-language UI translation map
 │   ├── types.ts                          # Shared TypeScript interfaces
@@ -222,6 +222,20 @@ vercel dev
 ---
 
 
+
+### v2.4.0 — July 2026
+- 🚚 **Data:** Added 3 real trucking/logistics funding sources — the **PM E-DRIVE e-Truck Incentive Scheme** (₹500 Cr, Ministry of Heavy Industries), the **ULIP Logistics Innovation Challenge** (NICDC / National Logistics Policy), and the **NABARD Warehouse Infrastructure Fund** — under a new `logistics` domain tag. Database now totals **84 real grants**.
+- 🏷️ **Feature:** Synced the domain filter dropdowns (grant search + startup profile form) with every domain actually present in the database, including the new Logistics & Trucking category, across all 7 supported languages.
+- 💱 **Fix:** Normalized a couple of scholarship entries that displayed "USD" as text instead of the `$` symbol, so all foreign-currency amounts now show a proper ₹ / $ / € / £ / ¥ sign consistently.
+- 🎙️ **Feature:** The chat agent's voice input button now has a proper 3-state cycle — **Listen → Syncing → Stop** — instead of jumping straight from listening to idle. A distinct amber "syncing" state (with spinner) shows while the last bit of speech is being finalized before the mic fully stops, with matching placeholder text and translations in all 7 languages.
+
+### v2.3.0 — July 2026
+- 📈 **Data:** Expanded `src/data/grants.ts` from 66 to **81 real, verifiable Indian startup funding schemes** — added CGSS, Fund of Funds 2.0, Maharashtra's MSInS Seed Fund / Maha-Fund, TANSEED (Tamil Nadu), T-SEED (Telangana), Gujarat SSIP 2.0, NIDHI SSP, iDEX DISC, MeitY GENESIS, BIRAC SITARE, BIRAC Grand Challenges India, PMEGP, MUDRA (PMMY), and Karnataka's SC/ST- and women-led startup grants. Every entry has a real scheme name, source, and official portal link — no placeholder or simulated data.
+
+### v2.2.0 — July 2026
+- ✨ **Feature:** Ported the **Proposal Tone selector** (Formal, Technical, Persuasive, Concise) from the earlier static HTML prototype into the live React Proposal Generator — the tone choice is sent to `/api/proposals/generate` and steers the Watsonx.ai system prompt (and the offline fallback copy) so drafts read differently depending on the funder's expectations.
+- ✨ **Feature:** Expanded the AI-drafted proposal from 6 to **9 sections**, adding **Traction & Validation**, **Team & Execution Capability**, and **Risk & Compliance Mitigation** (also ported from the prototype's 10-section spec) for a more complete, board-ready document in all supported fallback languages (English, Hindi, Punjabi) and in the live Watsonx.ai prompt.
+- 📝 **Docs:** README changelog updated.
 
 ### v2.1.0 — June 2026
 - 📝 **Docs:** README Project Structure now includes `api/lib/orchestrate.ts` (optional watsonx Orchestrate agent client) and `api/lib/compliance.ts` (submission-boundary guardrail)

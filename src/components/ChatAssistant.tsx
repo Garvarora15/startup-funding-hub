@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChatMessage, StartupProfile } from '../types';
-import { Send, Bot, User, Sparkles, Terminal, Volume2, Square, Mic, MicOff, ArrowRight } from 'lucide-react';
+import { Send, Bot, User, Sparkles, Terminal, Volume2, Square, Mic, MicOff, ArrowRight, RefreshCw } from 'lucide-react';
 import { TRANSLATIONS } from '../locales/translations';
 import { GRANTS } from '../data/grants';
 
@@ -137,7 +137,9 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
   const [reasoningLogs, setReasoningLogs] = useState<string[]>([]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  const [isListening, setIsListening] = useState(false);
+  const [voiceStatus, setVoiceStatus] = useState<'idle' | 'listening' | 'syncing'>('idle');
+  const isListening = voiceStatus === 'listening';
+  const isSyncing = voiceStatus === 'syncing';
   const recognitionRef = useRef<any>(null);
   const startSpeechTextRef = useRef('');
 
@@ -152,7 +154,7 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
         const rec = new SpeechRecognition();
         rec.continuous = true;
         rec.interimResults = true;
-        rec.onstart = () => setIsListening(true);
+        rec.onstart = () => setVoiceStatus('listening');
         rec.onresult = (event: any) => {
           let totalFinal = '';
           let totalInterim = '';
@@ -164,8 +166,8 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
           const speechPart = (totalFinal + totalInterim).trim();
           setInput(startSpeechTextRef.current + speechPart);
         };
-        rec.onerror = () => setIsListening(false);
-        rec.onend = () => setIsListening(false);
+        rec.onerror = () => setVoiceStatus('idle');
+        rec.onend = () => setVoiceStatus('idle');
         recognitionRef.current = rec;
       }
     }
@@ -183,7 +185,14 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
       alert("Speech recognition is not supported in this browser.");
       return;
     }
-    if (isListening) {
+    if (voiceStatus === 'syncing') {
+      // Already finalizing the last transcript — ignore taps until it settles.
+      return;
+    }
+    if (voiceStatus === 'listening') {
+      // Mark as syncing immediately: the engine still needs a moment to
+      // finalize the last utterance before onend fires and we go idle.
+      setVoiceStatus('syncing');
       recognitionRef.current.stop();
     } else {
       const prefix = input ? input.trim() + ' ' : '';
@@ -534,14 +543,32 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
 
       {/* Input */}
       <div className="p-4 bg-[#F0F0E8] border-t border-[#DEDCCF] flex items-center gap-2">
-        <button type="button" onClick={toggleListening} disabled={loading} className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border transition cursor-pointer ${isListening ? 'bg-rose-500 border-rose-600 text-white animate-pulse' : 'bg-white border-[#DEDCCF] text-[#5A5A40] hover:bg-[#ECEBE4]'}`}>
-          {isListening ? <MicOff className="w-4 h-4 animate-bounce" /> : <Mic className="w-4 h-4" />}
+        <button
+          type="button"
+          onClick={toggleListening}
+          disabled={loading || isSyncing}
+          title={isListening ? 'Stop' : isSyncing ? 'Syncing…' : 'Listen'}
+          className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border transition cursor-pointer ${
+            isListening
+              ? 'bg-rose-500 border-rose-600 text-white animate-pulse'
+              : isSyncing
+              ? 'bg-amber-500 border-amber-600 text-white cursor-wait'
+              : 'bg-white border-[#DEDCCF] text-[#5A5A40] hover:bg-[#ECEBE4]'
+          }`}
+        >
+          {isListening ? (
+            <MicOff className="w-4 h-4 animate-bounce" />
+          ) : isSyncing ? (
+            <RefreshCw className="w-4 h-4 animate-spin" />
+          ) : (
+            <Mic className="w-4 h-4" />
+          )}
         </button>
         <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="flex-1 flex gap-2 relative">
           <input
             type="text"
             className="flex-1 bg-white text-[#1A1A1A] text-xs px-4 py-3 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition pr-16"
-            placeholder={isListening ? t.listeningPlaceholder : (t.chatPlaceholder || "Query Watsonx about grants, eligibility, milestones...")}
+            placeholder={isListening ? t.listeningPlaceholder : isSyncing ? t.syncingPlaceholder : (t.chatPlaceholder || "Query Watsonx about grants, eligibility, milestones...")}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={loading}
