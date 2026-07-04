@@ -24,6 +24,7 @@
 - [Environment Variables](#-environment-variables)
 - [IBM AI Details](#-ibm-ai-details)
 - [Voice: TTS & STT Behavior](#-voice-tts--stt-behavior)
+- [Main Path vs. Fallback](#-main-path-vs-fallback--every-ai-dependent-feature)
 - [Orchestrate & Compliance Modules](#-orchestrate--compliance-modules)
 - [Changelog](#-changelog)
 - [License](#-license)
@@ -36,8 +37,8 @@
 
 The app connects to **IBM Watsonx.ai** using the `ibm/granite-4-h-small` model to power a multilingual AI funding strategist, eligibility scoring engine, pitch generator, and proposal drafter — all in one place.
 
-🔗 **Live Demo:** [startup-funding-zeta.vercel.app](https://startup-funding-zeta.vercel.app)
-📦 **Repository:** [github.com/Garvarora15/startup-funding](https://github.com/Garvarora15/startup-funding)
+🔗 **Live Demo:** [startup-funding-hub.vercel.app](https://startup-funding-hub.vercel.app)
+📦 **Repository:** [github.com/Garvarora15/startup-funding-hub](https://github.com/Garvarora15/startup-funding-hub)
 
 ---
 
@@ -46,7 +47,7 @@ The app connects to **IBM Watsonx.ai** using the `ibm/granite-4-h-small` model t
 | # | Feature | Description |
 |---|---------|-------------|
 | 1 | 🤖 **AI Chat Agent** | IBM Granite-powered grant strategist — answers funding queries in 7 languages with real-time Watsonx.ai responses |
-| 2 | 🔍 **Smart Grant Search** | Browse & filter 66+ live Indian startup grants (SISFS, BIRAC, DST, DPIIT, NASSCOM, and more) |
+| 2 | 🔍 **Smart Grant Search** | Browse & filter 84 live Indian startup grants (SISFS, BIRAC, DST, DPIIT, NASSCOM, and more) |
 | 3 | 📊 **Match Score Engine** | Dynamic 0–100% eligibility scoring per grant based on your startup profile (sector, stage, location, funding) |
 | 4 | 📝 **Proposal Generator** | AI-drafted 6-section professional grant proposals tailored per scheme with rendered markdown tables |
 | 5 | 🎤 **Pitch Generator** | Elevator, one-pager, investor-hook, and Twitter pitches auto-generated in 7 languages |
@@ -81,45 +82,84 @@ The app connects to **IBM Watsonx.ai** using the `ibm/granite-4-h-small` model t
 ## 📁 Project Structure
 
 ```
-startup-funding/
-├── api/                                  # Vercel Serverless Functions
+startup-funding-hub/
+├── api/                                   # Vercel Serverless Functions (Node runtime)
 │   ├── lib/
-│   │   ├── watsonx.ts                    # IBM IAM auth + Granite chat helper (Watsonx.ai)
-│   │   ├── orchestrate.ts                # Optional IBM watsonx Orchestrate agent client (separate IBM service)
-│   │   └── compliance.ts                 # Legal-boundary guardrail — blocks auto-submission, stamps "human validation required"
+│   │   ├── watsonx.ts                     # ★ MAIN AI CLIENT — IBM IAM auth (token cached, 5-min refresh buffer)
+│   │   │                                  #   + callGraniteWithRetry() → IBM Granite (granite-4-h-small) on Watsonx.ai
+│   │   ├── orchestrate.ts                 # OPTIONAL alternate path — calls a deployed IBM watsonx Orchestrate
+│   │   │                                  #   agent instead of raw Watsonx.ai chat, with its own IAM token cache
+│   │   └── compliance.ts                  # Guardrail — blocks auto-submission requests, stamps AI drafts with
+│   │                                       #   a "human validation required" notice
 │   ├── grants/
-│   │   ├── index.ts                      # GET  /api/grants
-│   │   └── calculate-match.ts            # POST /api/grants/calculate-match
+│   │   ├── index.ts                       # GET  /api/grants               — search/filter the static grants DB
+│   │   └── calculate-match.ts             # POST /api/grants/calculate-match — 0–100% eligibility scoring
 │   ├── agent/
-│   │   └── chat.ts                       # POST /api/agent/chat
+│   │   └── chat.ts                        # POST /api/agent/chat            — MAIN: Watsonx.ai Granite chat
+│   │                                       #   FALLBACK: generateLocalChatFallback() heuristic reply if
+│   │                                       #   Watsonx.ai (and Orchestrate, if enabled) both fail/error
 │   ├── proposals/
-│   │   └── generate.ts                   # POST /api/proposals/generate
+│   │   └── generate.ts                    # POST /api/proposals/generate    — MAIN: Watsonx.ai 9-section draft
+│   │                                       #   FALLBACK: generateLocalFallback() static templated proposal
 │   ├── profile/
-│   │   └── generate-pitch.ts             # POST /api/profile/generate-pitch
+│   │   └── generate-pitch.ts              # POST /api/profile/generate-pitch — MAIN: Watsonx.ai pitch copy
+│   │                                       #   FALLBACK: getSmartFallbackPitch() per-domain templated pitch
+│   │                                       #   (always in English, with a translated "AI unavailable" notice
+│   │                                       #   appended for the other 6 languages)
 │   └── tts/
-│       └── synthesize.ts                 # POST /api/tts/synthesize
+│       └── synthesize.ts                  # POST /api/tts/synthesize        — MAIN: Watson Text to Speech
+│                                           #   FALLBACK: returns { success:false, fallback:true } if TTS
+│                                           #   credentials are missing/invalid or the call errors — frontend
+│                                           #   then switches to the browser's Web Speech API automatically
 ├── src/
 │   ├── components/
-│   │   ├── ChatAssistant.tsx             # AI chat panel + TTS + speech input
-│   │   ├── CollapsibleFAQ.tsx            # FAQ accordion
-│   │   ├── Footer.tsx                    # Site footer
-│   │   ├── GrantCard.tsx                 # Grant card with match score
-│   │   ├── Navbar.tsx                    # Top nav + language switcher
-│   │   ├── PolicyModal.tsx               # Privacy / terms modal
-│   │   ├── ProposalGenerator.tsx         # Draft tab with markdown table rendering
-│   │   └── StartupProfileForm.tsx        # Left panel profile form
+│   │   ├── ChatAssistant.tsx              # AI chat panel — calls /api/agent/chat; handles TTS playback
+│   │   │                                  #   (with syncing state) + mic input (browser SpeechRecognition,
+│   │   │                                  #   no IBM STT service involved — 100% client-side, no fallback needed)
+│   │   ├── CollapsibleFAQ.tsx             # FAQ accordion (static content)
+│   │   ├── Footer.tsx                     # Site footer + policy links
+│   │   ├── GrantCard.tsx                  # Grant card — match score, TTS "read aloud", favorite toggle
+│   │   ├── Navbar.tsx                     # Top nav + language switcher (7 languages)
+│   │   ├── PolicyModal.tsx                # Privacy / cookies / terms modal
+│   │   ├── ProposalGenerator.tsx          # Draft tab — calls /api/proposals/generate, renders markdown tables
+│   │   └── StartupProfileForm.tsx         # Left panel profile form (feeds match scoring + pitch generation)
 │   ├── data/
-│   │   └── grants.ts                     # 66+ curated Indian startup grants
+│   │   └── grants.ts                      # 84 curated Indian startup grants (static — the single source of
+│   │                                       #   truth for /api/grants*; no external scraping or DB at runtime)
 │   ├── locales/
-│   │   └── translations.ts               # 7-language UI translation map
-│   ├── types.ts                          # Shared TypeScript interfaces
-│   ├── main.tsx                          # React entry point
-│   └── index.css                         # Global styles
-├── .env.example                          # Environment variable template
-├── vercel.json                           # Vercel routing config
-├── vite.config.ts                        # Vite build config
-├── tsconfig.json                         # TypeScript config
+│   │   └── translations.ts                # 7-language UI translation map (English, Hindi, Punjabi, Spanish,
+│   │                                       #   French, German, Japanese)
+│   ├── App.tsx                            # Top-level state: profile, grants, match scores, active tab, favorites
+│   ├── types.ts                           # Shared TypeScript interfaces (Grant, StartupProfile, ChatMessage…)
+│   ├── main.tsx                           # React entry point (ReactDOM root)
+│   └── index.css                          # Global styles + Tailwind v4 "Granite & Sprout" design tokens
+├── .env.example                           # Environment variable template
+├── vercel.json                            # Vercel routing config (SPA rewrite + API routes)
+├── vite.config.ts                         # Vite build config
+├── tsconfig.json                          # TypeScript config (strict mode)
 └── package.json
+```
+
+### 🧩 How the pieces connect (data flow)
+
+```
+StartupProfileForm ──▶ App.tsx (profile state)
+                          │
+                          ├──▶ /api/grants/calculate-match   ──▶ match % + reasons  ──▶ GrantCard
+                          ├──▶ /api/grants (q/stage/domain)  ──▶ filtered grant list ──▶ Browse tab
+                          │
+ChatAssistant ────────────┼──▶ /api/agent/chat               ──▶ watsonx.ts (Granite) ──▶ [orchestrate.ts, optional]
+                          │                                       ⤷ on failure: local heuristic reply
+                          │
+ProposalGenerator ────────┼──▶ /api/proposals/generate       ──▶ watsonx.ts (Granite, 9-section draft)
+                          │                                       ⤷ on failure: static templated draft
+                          │                                   ──▶ compliance.ts stamps "human validation required"
+                          │
+StartupProfileForm (pitch)┴──▶ /api/profile/generate-pitch    ──▶ watsonx.ts (Granite pitch copy)
+                                                                    ⤷ on failure: per-domain templated pitch
+
+GrantCard / ChatAssistant ───▶ /api/tts/synthesize            ──▶ Watson Text to Speech
+                                                                    ⤷ on failure: browser Web Speech API
 ```
 
 ---
@@ -131,12 +171,12 @@ startup-funding/
 - Node.js ≥ 18
 - npm ≥ 9
 - Vercel CLI (`npm i -g vercel`) — required to run serverless API routes locally
-- IBM Cloud account with Watsonx.ai project
+- IBM Cloud account with a Watsonx.ai project (only needed for live AI responses — the app runs and is fully clickable without it, using the fallback content described throughout this README)
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/Garvarova15/startup-funding.git
-cd startup-funding
+git clone https://github.com/Garvarora15/startup-funding-hub.git
+cd startup-funding-hub
 
 # 2. Install dependencies
 npm install
@@ -144,12 +184,17 @@ npm install
 # 3. Set up environment variables
 cp .env.example .env.local
 # Edit .env.local and fill in your IBM_API_KEY and IBM_PROJECT_ID
+# (WATSON_TTS_API_KEY / WATSON_TTS_URL and the ORCHESTRATE_* vars are optional)
 
-# 4. Start local dev server (with API routes)
+# 4. Start the local dev server
 vercel dev
 ```
 
-> **Tip:** Use `npm run dev` for frontend-only (no API routes). Use `vercel dev` for the full stack including serverless functions.
+Then open **http://localhost:3000** (Vercel CLI's default port — it will print the actual port in the terminal).
+
+> **Frontend-only mode:** `npm run dev` starts just the Vite dev server (fast, hot-reload) but **without** the `/api/*` serverless routes — grant matching, chat, proposals, pitches, and TTS will all silently use their offline fallbacks or fail to fetch. Use `vercel dev` whenever you need the real backend, even without IBM credentials configured (the API routes still run locally and gracefully fall back to local heuristics).
+
+> **First time using Vercel CLI?** Running `vercel dev` in a fresh clone will prompt you to log in and link the folder to a Vercel project — you can select "no" / create a new project if you don't want to link it to your actual deployment.
 
 ---
 
@@ -212,6 +257,22 @@ vercel dev
 
 ---
 
+## 🔁 Main Path vs. Fallback — Every AI-Dependent Feature
+
+Every feature that depends on an external service degrades gracefully instead of breaking the UI. This table is the single source of truth for what runs when, and why:
+
+| Feature | Main path | Triggers fallback when… | Fallback behavior |
+|---|---|---|---|
+| **Chat Agent** (`/api/agent/chat`) | IBM Granite (`granite-4-h-small`) via Watsonx.ai, optionally routed through watsonx Orchestrate first if `ORCHESTRATE_*` vars are set | Watsonx.ai request errors/times out, or (if enabled) Orchestrate call fails | `generateLocalChatFallback()` — a local heuristic reply built from keyword-matching the user's message against `src/data/grants.ts`, still returned as `success: true` so the chat UI never shows a hard error |
+| **Grant Proposal** (`/api/proposals/generate`) | Watsonx.ai Granite drafts a 9-section proposal, tone-steered by the selected Proposal Tone (Formal/Technical/Persuasive/Concise) | Watsonx.ai request errors/times out | `generateLocalFallback()` — a fully templated 9-section proposal using the same section headings, filled in with the startup's profile fields |
+| **Pitch Generator** (`/api/profile/generate-pitch`) | Watsonx.ai Granite generates pitch copy in the requested format & language | Watsonx.ai request errors/times out | `getSmartFallbackPitch()` — a per-domain templated pitch (English only); for non-English languages, a translated one-line notice ("this pitch is shown in English because the AI service is temporarily unavailable") is appended |
+| **Grant Matching** (`/api/grants/calculate-match`) | Deterministic scoring logic (stage/domain/location/funding rules) — **not** AI-dependent, so there is no fallback path; it always runs the same way | — | — |
+| **Text to Speech** (`/api/tts/synthesize`) | Watson Text to Speech, voice matched to the active UI language (`en-US_AllisonV3Voice`, `hi-IN_AditiVoice`, etc.) | `WATSON_TTS_API_KEY` / `WATSON_TTS_URL` are missing, the Watson call errors, or Punjabi is selected (no real Watson Punjabi voice exists yet) | Frontend receives `{ success:false, fallback:true }` and switches to the browser's native **Web Speech API** (`window.speechSynthesis`), using the same language mapping. The Listen button shows a distinct **Syncing…** state (spinner) while this handoff happens, so the wait is never mistaken for the button being unresponsive |
+| **Speech to Text** (mic input in Chat Agent) | Browser-native `SpeechRecognition` / `webkitSpeechRecognition` — there is no IBM STT service in this app at all | Browser doesn't support the Web Speech API | The mic button shows an alert telling the user their browser isn't supported; there's no secondary fallback since it's already the "default" path |
+| **Watsonx Orchestrate** (`api/lib/orchestrate.ts`) | Off by default. If `ORCHESTRATE_SERVICE_URL`, `ORCHESTRATE_AGENT_ID`, and `ORCHESTRATE_IAM_APIKEY` are all set, `chat.ts` tries the Orchestrate agent **before** falling through to the raw Granite/Watsonx.ai path | Orchestrate call errors, or the env vars aren't set at all | Falls through to the normal Watsonx.ai Granite chat path described above (which itself falls through to the local heuristic reply if that also fails) |
+
+---
+
 ## 🧭 Orchestrate & Compliance Modules
 
 | Module | Purpose |
@@ -221,33 +282,28 @@ vercel dev
 
 ---
 
+## 📜 Changelog
 
+### v2.1.0 — July 2026 (Voice & Data Expansion)
+- 🎙️ **Feature:** Chat agent voice input now has a proper 3-state cycle — **Listen → Syncing → Stop** — with a matching **Syncing…** state added to the TTS "Listen" playback button too, so both the mic and audio playback show a clear loading state instead of looking unresponsive. Fully localized across all 7 languages.
+- 🚚 **Data:** Grant database expanded from 66 → **84 real, verifiable schemes** — added CGSS, Fund of Funds 2.0, state-level funds (Maharashtra, Tamil Nadu, Telangana, Gujarat, Karnataka), NIDHI SSP, iDEX DISC, MeitY GENESIS, BIRAC SITARE/Grand Challenges, PMEGP, MUDRA, and 3 new logistics/trucking schemes under a new `logistics` domain.
+- 🏷️ **Fix:** Domain filter dropdowns synced with every domain actually present in the database (incl. new Logistics category) across all languages; normalized a few scholarship entries that showed "USD" as text instead of `$`.
+- ✨ **Feature:** Proposal Generator expanded from 6 → **9 sections** (added Traction & Validation, Team & Execution Capability, Risk & Compliance Mitigation) and gained a **Tone selector** (Formal/Technical/Persuasive/Concise) that steers both the live Watsonx.ai prompt and the offline fallback copy.
+- 📝 **Docs:** Full README overhaul — fixed a stale clone URL/repo name, rebuilt the Project Structure tree to cover every file with main-vs-fallback notes, added a data-flow diagram, and added a consolidated "Main Path vs. Fallback" table for all 6 AI/voice-dependent features.
 
-### v2.1.0 — June 2026
-- 📝 **Docs:** README Project Structure now includes `api/lib/orchestrate.ts` (optional watsonx Orchestrate agent client) and `api/lib/compliance.ts` (submission-boundary guardrail)
-- 📝 **Docs:** Added explicit Speech-to-Text feature entry and a full TTS/STT fallback behavior section
-- 📝 **Docs:** Added dedicated section documenting the Orchestrate and Compliance backend modules
+### v2.0.0 — June–July 2026 (Reliability & Docs)
+- ✅ **Fix:** TTS voice pre-loading on app mount (eliminated ~60s startup lag); TTS language mapping extended to all 7 languages (Spanish, French, German, Japanese were previously silently falling back to English).
+- ✅ **Improvement:** Proposal Generator now renders markdown pipe tables as proper styled HTML tables (`parseMarkdownToHtml` rewritten with a two-pass block-grouping approach).
+- 📝 **Docs:** README restructured with full tables, changelog, table of contents, an explicit Speech-to-Text section, a full TTS/STT fallback behavior writeup, and documentation of the Orchestrate/Compliance backend modules.
 
-### v2.0.0 — June 2026
-- ✅ **Fix:** TTS voice pre-loading on app mount — eliminates ~60s startup lag
-- ✅ **Fix:** TTS language mapping extended to all 7 languages (Spanish `es-ES`, French `fr-FR`, German `de-DE`, Japanese `ja-JP` were previously falling back to English)
-- ✅ **Fix:** Proposal Generator now renders markdown pipe tables as proper HTML tables with styled headers and alternating rows
-- ✅ **Improvement:** `parseMarkdownToHtml` rewritten with a two-pass block-grouping approach for reliable table detection
-- ✅ **Improvement:** README updated with full markdown tables, changelog, and table of contents
-
-### v1.0.0 — June 2026
-- 🚀 Initial release — IBM AICTE internship submission
-- AI Chat Agent powered by IBM Granite via Watsonx.ai
-- 30+ Indian startup grant schemes with eligibility matching
-- Multilingual UI (7 languages) with Watson TTS
-- Proposal Generator and Pitch Generator
-- Deployed on Vercel
+### v1.0.0 — June 2026 (Initial Release)
+- 🚀 Initial release for the IBM AICTE internship submission — AI Chat Agent powered by IBM Granite via Watsonx.ai, 30+ Indian startup grant schemes with eligibility matching, multilingual UI (7 languages) with Watson TTS, Proposal Generator, Pitch Generator, deployed on Vercel.
 
 ---
 
 ## 📜 License
 
-MIT — Built as part of the **IBM AICTE University Engagement Internship**.
+MIT — Built as part of the **IBM Skills Build for University Engagements**m
 
 **Problem Statement #18** — AI Grant and Funding Finder for Startups
 
