@@ -134,6 +134,7 @@ export interface LocaleStrings {
   onlineStatus: string;
   cognitiveCore: string;
   listenLabel: string;
+  syncingLabel: string;
   reasoningMonitor: string;
   suggestedQueries: string;
   listeningPlaceholder: string;
@@ -287,6 +288,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     onlineStatus: "Online",
     cognitiveCore: "Watsonx Cognitive Core",
     listenLabel: "Listen",
+    syncingLabel: "Syncing…",
     reasoningMonitor: "IBM Granite Reasoning Monitor",
     suggestedQueries: "Suggested Queries",
     listeningPlaceholder: "Listening... Speak now",
@@ -438,6 +440,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     onlineStatus: "ऑनलाइन",
     cognitiveCore: "कॉग्निटिव कोर",
     listenLabel: "सुनें",
+    syncingLabel: "सिंक हो रहा है…",
     reasoningMonitor: "IBM ग्रेनाइट रीजनिंग मॉनिटर",
     suggestedQueries: "सुझाए गए प्रश्न",
     listeningPlaceholder: "सुन रहा हूँ... बोलें",
@@ -589,6 +592,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     onlineStatus: "ਔਨਲਾਈਨ",
     cognitiveCore: "ਕੋਗਨਿਟਿਵ ਕੋਰ",
     listenLabel: "ਸੁਣੋ",
+    syncingLabel: "ਸਿੰਕ ਹੋ ਰਿਹਾ ਹੈ…",
     reasoningMonitor: "IBM ਗ੍ਰੇਨਾਈਟ ਰੀਜ਼ਨਿੰਗ ਮਾਨੀਟਰ",
     suggestedQueries: "ਸੁਝਾਏ ਗਏ ਪ੍ਰਸ਼ਨ",
     listeningPlaceholder: "ਸੁਣ ਰਿਹਾ ਹਾਂ... ਬੋਲੋ",
@@ -740,6 +744,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     onlineStatus: "En Línea",
     cognitiveCore: "Núcleo Cognitivo Watsonx",
     listenLabel: "Escuchar",
+    syncingLabel: "Sincronizando…",
     reasoningMonitor: "Monitor de Razonamiento IBM Granite",
     suggestedQueries: "Consultas Sugeridas",
     listeningPlaceholder: "Escuchando... Habla ahora",
@@ -891,6 +896,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     onlineStatus: "En Ligne",
     cognitiveCore: "Noyau Cognitif Watsonx",
     listenLabel: "Écouter",
+    syncingLabel: "Synchronisation…",
     reasoningMonitor: "Moniteur de Raisonnement IBM Granite",
     suggestedQueries: "Requêtes Suggérées",
     listeningPlaceholder: "Écoute en cours... Parlez maintenant",
@@ -1042,6 +1048,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     onlineStatus: "Online",
     cognitiveCore: "Watsonx Cognitive Core",
     listenLabel: "Anhören",
+    syncingLabel: "Synchronisiere…",
     reasoningMonitor: "IBM Granite Reasoning-Monitor",
     suggestedQueries: "Vorgeschlagene Anfragen",
     listeningPlaceholder: "Höre zu... Jetzt sprechen",
@@ -1193,6 +1200,7 @@ export const TRANSLATIONS: Record<string, LocaleStrings> = {
     onlineStatus: "オンライン",
     cognitiveCore: "Watsonxコグニティブコア",
     listenLabel: "聞く",
+    syncingLabel: "同期中…",
     reasoningMonitor: "IBM Granite推論モニター",
     suggestedQueries: "推奨される質問",
     listeningPlaceholder: "聞いています...話してください",

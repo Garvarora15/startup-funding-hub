@@ -145,6 +145,7 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
 
   const [ttsMsgId, setTtsMsgId] = useState<string | null>(null);
   const [isPlayingTts, setIsPlayingTts] = useState(false);
+  const [isTtsSyncing, setIsTtsSyncing] = useState(false);
   const audioTtsRef = useRef<{ pause: () => void } | null>(null);
 
   useEffect(() => {
@@ -203,11 +204,16 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
   };
 
   const speakMessage = async (msgId: string, text: string) => {
-    if (isPlayingTts && ttsMsgId === msgId) {
+    // Ignore taps while the previous request is still settling — mirrors
+    // the mic's syncing guard so a double-tap can't leave state stuck.
+    if (isTtsSyncing) return;
+
+    if ((isPlayingTts || isTtsSyncing) && ttsMsgId === msgId) {
       if (audioTtsRef.current) audioTtsRef.current.pause();
       if (typeof window !== 'undefined' && 'speechSynthesis' in window) window.speechSynthesis.cancel();
       audioTtsRef.current = null;
       setIsPlayingTts(false);
+      setIsTtsSyncing(false);
       setTtsMsgId(null);
       return;
     }
@@ -215,7 +221,11 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) window.speechSynthesis.cancel();
     audioTtsRef.current = null;
     setTtsMsgId(msgId);
-    setIsPlayingTts(true);
+    setIsPlayingTts(false);
+    // Mark as syncing immediately: Watson TTS synthesis takes a moment to
+    // return audio, and this covers that lag with a clear "loading" state
+    // instead of leaving the button looking idle/unresponsive.
+    setIsTtsSyncing(true);
 
     const cleanedText = text
       .replace(/\*\*(.*?)\*\*/g, '$1')
@@ -244,6 +254,8 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
         newAudio.onended = () => { setIsPlayingTts(false); setTtsMsgId(null); audioTtsRef.current = null; };
         newAudio.onerror = () => fallbackWebSpeechChat(cleanedText, msgId);
         audioTtsRef.current = newAudio;
+        setIsTtsSyncing(false);
+        setIsPlayingTts(true);
         newAudio.play();
       } else {
         fallbackWebSpeechChat(cleanedText, msgId);
@@ -255,7 +267,7 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
 
   const fallbackWebSpeechChat = (textToSpeak: string, msgId: string) => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-      setIsPlayingTts(false); setTtsMsgId(null); return;
+      setIsTtsSyncing(false); setIsPlayingTts(false); setTtsMsgId(null); return;
     }
 
     const speakNow = () => {
@@ -275,6 +287,7 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
     };
 
     window.speechSynthesis.cancel();
+    setIsTtsSyncing(false);
     setIsPlayingTts(true);
     setTtsMsgId(msgId);
     audioTtsRef.current = { pause: () => { window.speechSynthesis.cancel(); setIsPlayingTts(false); setTtsMsgId(null); audioTtsRef.current = null; } };
@@ -480,10 +493,13 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
                   <button
                     type="button"
                     onClick={() => speakMessage(msg.id, msg.content)}
-                    title={currentLanguage === 'punjabi' ? 'Punjabi voice quality may be limited or unavailable in your browser' : undefined}
-                    className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] text-[#5A5A40] hover:text-[#4A4A30] hover:bg-[#ECEBE4]/50 font-mono font-bold transition cursor-pointer"
+                    disabled={isTtsSyncing && ttsMsgId !== msg.id}
+                    title={currentLanguage === 'punjabi' ? 'Punjabi voice quality may be limited or unavailable in your browser' : (isTtsSyncing && ttsMsgId === msg.id ? 'Syncing…' : undefined)}
+                    className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] text-[#5A5A40] hover:text-[#4A4A30] hover:bg-[#ECEBE4]/50 font-mono font-bold transition cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    {isPlayingTts && ttsMsgId === msg.id ? (
+                    {isTtsSyncing && ttsMsgId === msg.id ? (
+                      <><RefreshCw className="w-3.5 h-3.5 animate-spin" /><span>{t.syncingLabel}</span></>
+                    ) : isPlayingTts && ttsMsgId === msg.id ? (
                       <><Square className="w-2.5 h-2.5 fill-[#5A5A40] text-[#5A5A40]" /><span>{t.stopLabel}</span></>
                     ) : (
                       <><Volume2 className="w-3.5 h-3.5" /><span>{t.listenLabel}</span></>
