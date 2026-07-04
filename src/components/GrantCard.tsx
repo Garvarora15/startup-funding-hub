@@ -275,7 +275,7 @@ export default function GrantCard({
 
   // Match score color classes using elegant natural tone variants
   const getScoreColor = (num: number) => {
-    if (num >= 80) return 'text-[#198038] bg-[#198038]/5 border-[#198038]/20';
+    if (num >= 80) return 'text-[#10B981] bg-[#10B981]/5 border-[#10B981]/20';
     if (num >= 55) return 'text-[#b45309] bg-[#fef3c7] border-[#fde68a]';
     return 'text-[#b91c1c] bg-[#fee2e2] border-[#fecaca]';
   };
@@ -375,18 +375,18 @@ export default function GrantCard({
   };
 
   return (
-    <div className="bg-white border border-[#E0E0E0] rounded-[20px] p-5 shadow-sm hover:border-[#0F62FE] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between text-[#1F2328]">
+    <div className="bg-white border border-[#DEDCCF] rounded-[20px] p-5 shadow-sm hover:border-[#5A5A40] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between text-[#1A1A1A]">
       {/* Visual Accent Bar */}
-      <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#0F62FE]" />
+      <div className="absolute top-0 left-0 right-0 h-[4px] bg-[#5A5A40]" />
 
       <div>
         {/* Title and Score Row */}
         <div className="flex justify-between items-start gap-4 mb-2">
           <div className="flex-1">
-            <h3 className="font-display font-semibold text-[#0353E9] text-base tracking-tight leading-tight hover:text-[#0F62FE] transition duration-200">
+            <h3 className="font-display font-semibold text-[#4A4A30] text-base tracking-tight leading-tight hover:text-[#5A5A40] transition duration-200">
               {grant.name}
             </h3>
-            <p className="text-xs text-[#57606A] font-medium mt-1">
+            <p className="text-xs text-[#8E8E80] font-medium mt-1">
               {labels.source} {grant.source}
             </p>
           </div>
@@ -398,7 +398,7 @@ export default function GrantCard({
               className={`p-2 rounded-xl border transition cursor-pointer flex items-center justify-center ${
                 isFavorite 
                   ? 'bg-amber-50 border-amber-200 text-amber-500 hover:bg-amber-100 shadow-sm' 
-                  : 'bg-[#F4F4F4] border-[#E0E0E0] text-[#57606A] hover:bg-[#E8EFFE] hover:text-[#0F62FE]'
+                  : 'bg-[#F0F0E8] border-[#DEDCCF] text-[#8E8E80] hover:bg-[#ECEBE4] hover:text-[#5A5A40]'
               }`}
               title={isFavorite ? "Remove from Favorites" : "Add to Favorites"}
             >
@@ -406,7 +406,7 @@ export default function GrantCard({
             </button>
 
             <div className={`flex flex-col items-center justify-center px-3 py-1.5 rounded-xl border text-center ${getScoreColor(score)}`}>
-              <span className="text-[9px] font-mono font-semibold uppercase tracking-wider text-[#57606A]">{labels.match}</span>
+              <span className="text-[9px] font-mono font-semibold uppercase tracking-wider text-[#8E8E80]">{labels.match}</span>
               <span className="text-sm font-bold font-mono leading-none mt-0.5">{score}%</span>
             </div>
           </div>
@@ -414,13 +414,13 @@ export default function GrantCard({
 
         {/* Amount, Stage, Domain & Deadline Badges */}
         <div className="flex flex-wrap gap-1.5 my-3">
-          <span className="bg-[#F4F4F4] text-[#0F62FE] border border-[#E0E0E0] text-[11px] font-semibold px-2.5 py-1 rounded-lg">
+          <span className="bg-[#F0F0E8] text-[#5A5A40] border border-[#DEDCCF] text-[11px] font-semibold px-2.5 py-1 rounded-lg">
             💰 {grant.amount_display}
           </span>
-          <span className="bg-[#E8EFFE] text-[#0353E9] border border-[#E0E0E0] text-[10px] font-mono px-2.5 py-1 rounded-full">
+          <span className="bg-[#ECEBE4] text-[#4A4A30] border border-[#DEDCCF] text-[10px] font-mono px-2.5 py-1 rounded-full">
             🚀 {getStageLabel(grant.stage)}
           </span>
-          <span className="bg-[#E8EFFE] text-[#0353E9] border border-[#E0E0E0] text-[10px] font-mono px-2.5 py-1 rounded-full">
+          <span className="bg-[#ECEBE4] text-[#4A4A30] border border-[#DEDCCF] text-[10px] font-mono px-2.5 py-1 rounded-full">
             🏷️ {getDomainLabel(grant.domain)}
           </span>
           {deadlineBadge && (
@@ -436,14 +436,14 @@ export default function GrantCard({
           <button
             onClick={handleReadAloud}
             disabled={ttsLoading}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E0E0E0] bg-[#FFFFFF] hover:bg-[#E8EFFE] text-[#0F62FE] transition text-[10.5px] font-mono font-bold cursor-pointer disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DEDCCF] bg-[#F5F5F0] hover:bg-[#ECEBE4] text-[#5A5A40] transition text-[10.5px] font-mono font-bold cursor-pointer disabled:opacity-50"
           >
             {ttsLoading ? (
               <RefreshCw className="w-3.5 h-3.5 animate-spin" />
             ) : isPlaying ? (
-              <Square className="w-2.5 h-2.5 fill-[#0F62FE] text-[#0F62FE]" />
+              <Square className="w-2.5 h-2.5 fill-[#5A5A40] text-[#5A5A40]" />
             ) : (
-              <Volume2 className="w-3.5 h-3.5 text-[#0F62FE]" />
+              <Volume2 className="w-3.5 h-3.5 text-[#5A5A40]" />
             )}
             <span>
               {ttsLoading 
@@ -463,23 +463,23 @@ export default function GrantCard({
 
       <div>
         {/* Collapsible reasoning list */}
-        <div className="border-t border-[#E0E0E0] pt-3 mt-2">
+        <div className="border-t border-[#DEDCCF] pt-3 mt-2">
           <button
             onClick={() => setExpanded(!expanded)}
-            className="flex items-center justify-between w-full text-[#0F62FE] hover:text-[#1F2328] transition text-xs font-semibold uppercase tracking-wider"
+            className="flex items-center justify-between w-full text-[#5A5A40] hover:text-[#1A1A1A] transition text-xs font-semibold uppercase tracking-wider"
           >
             <span>{labels.reasoningHeader}</span>
             {expanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
 
           {expanded && (
-            <div className="mt-3 space-y-2 bg-[#FFFFFF] p-3.5 rounded-xl border border-[#E0E0E0] text-xs">
+            <div className="mt-3 space-y-2 bg-[#F5F5F0] p-3.5 rounded-xl border border-[#DEDCCF] text-xs">
               <div>
                 <span className="text-slate-600 font-medium block mb-1">{labels.boardReqs}</span>
                 <p className="text-slate-800 leading-normal font-sans">{grant.eligibility}</p>
               </div>
 
-              <div className="space-y-1.5 pt-2 border-t border-[#E0E0E0]">
+              <div className="space-y-1.5 pt-2 border-t border-[#DEDCCF]">
                 <span className="text-slate-600 font-medium block">{labels.matchExplanation}</span>
                 {reasons.map((reason, idx) => {
                   const isWarning = reason.toLowerCase().includes('warning') || reason.toLowerCase().includes('mismatch') || reason.toLowerCase().includes('ineligible');
@@ -488,7 +488,7 @@ export default function GrantCard({
                       {isWarning ? (
                         <AlertTriangle className="w-3.5 h-3.5 text-rose-600 shrink-0 mt-0.5" />
                       ) : (
-                        <CheckCircle className="w-3.5 h-3.5 text-[#198038] shrink-0 mt-0.5" />
+                        <CheckCircle className="w-3.5 h-3.5 text-[#10B981] shrink-0 mt-0.5" />
                       )}
                       <span className={isWarning ? 'text-rose-900' : 'text-slate-800'}>{reason}</span>
                     </div>
@@ -500,13 +500,13 @@ export default function GrantCard({
         </div>
 
         {/* Action Bar */}
-        <div className="flex gap-1.5 sm:gap-2 border-t border-[#E0E0E0] pt-3 sm:pt-4 mt-3 sm:mt-4 text-[10.5px] sm:text-xs font-mono">
+        <div className="flex gap-1.5 sm:gap-2 border-t border-[#DEDCCF] pt-3 sm:pt-4 mt-3 sm:mt-4 text-[10.5px] sm:text-xs font-mono">
           <button
             onClick={() => onSelectForProposal(grant)}
             className={`flex-[2] flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-2 sm:py-2.5 rounded-xl border font-semibold transition cursor-pointer ${
               isSelectedForProposal
-                ? 'bg-[#0F62FE] border-transparent text-white shadow-sm'
-                : 'border-[#E0E0E0] bg-[#F4F4F4] text-[#0F62FE] hover:bg-[#E8EFFE]'
+                ? 'bg-[#5A5A40] border-transparent text-white shadow-sm'
+                : 'border-[#DEDCCF] bg-[#F0F0E8] text-[#5A5A40] hover:bg-[#ECEBE4]'
             }`}
           >
             <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
@@ -517,7 +517,7 @@ export default function GrantCard({
             href={grant.application_link}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-2.5 rounded-xl border border-[#E0E0E0] bg-[#F4F4F4] text-slate-700 hover:bg-[#E8EFFE] hover:text-[#1F2328] hover:border-[#0F62FE] transition duration-200"
+            className="flex-1 flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-2 sm:py-2.5 rounded-xl border border-[#DEDCCF] bg-[#F0F0E8] text-slate-700 hover:bg-[#ECEBE4] hover:text-[#1A1A1A] hover:border-[#5A5A40] transition duration-200"
             title="Launch Official Application Portal"
           >
             <ExternalLink className="w-3 sm:w-3.5 h-3 sm:h-3.5 shrink-0" />
@@ -526,9 +526,9 @@ export default function GrantCard({
         </div>
 
         {/* Footer info row */}
-        <div className="flex justify-between text-[10px] text-[#57606A] font-mono mt-3">
+        <div className="flex justify-between text-[10px] text-[#8E8E80] font-mono mt-3">
           <span className="flex items-center gap-1">
-            <Calendar className="w-3 h-3 text-[#0F62FE]" /> {labels.deadline} {grant.deadline}
+            <Calendar className="w-3 h-3 text-[#5A5A40]" /> {labels.deadline} {grant.deadline}
           </span>
           <span>{labels.synced} {grant.last_scraped}</span>
         </div>

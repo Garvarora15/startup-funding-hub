@@ -93,9 +93,9 @@ export default function CollapsibleFAQ({ currentLanguage }: CollapsibleFAQProps)
   };
 
   return (
-    <div id="faq-section" className="bg-white border border-[#E0E0E0] rounded-2xl p-6 shadow-sm mt-8">
-      <h3 className="font-display font-semibold text-[#0353E9] text-sm md:text-base tracking-tight mb-4 flex items-center gap-2">
-        <span className="flex items-center justify-center w-6 h-6 rounded bg-[#0F62FE]/10 text-[#0F62FE] text-xs font-mono font-bold">?</span>
+    <div id="faq-section" className="bg-white border border-[#DEDCCF] rounded-2xl p-6 shadow-sm mt-8">
+      <h3 className="font-display font-semibold text-[#4A4A30] text-sm md:text-base tracking-tight mb-4 flex items-center gap-2">
+        <span className="flex items-center justify-center w-6 h-6 rounded bg-[#5A5A40]/10 text-[#5A5A40] text-xs font-mono font-bold">?</span>
         <span>{getTitle()}</span>
       </h3>
       <div className="space-y-2.5">
@@ -104,24 +104,24 @@ export default function CollapsibleFAQ({ currentLanguage }: CollapsibleFAQProps)
           return (
             <div 
               key={idx} 
-              className="border border-[#E0E0E0] rounded-xl overflow-hidden transition-colors duration-200"
+              className="border border-[#DEDCCF] rounded-xl overflow-hidden transition-colors duration-200"
             >
               <button
                 type="button"
                 onClick={() => setOpenIdx(isOpen ? null : idx)}
-                className="w-full flex items-center justify-between p-4 bg-[#FFFFFF] hover:bg-[#E8EFFE] text-left transition cursor-pointer"
+                className="w-full flex items-center justify-between p-4 bg-[#F5F5F0] hover:bg-[#ECEBE4] text-left transition cursor-pointer"
               >
-                <span className="font-sans font-semibold text-[#0353E9] text-xs md:text-sm">
+                <span className="font-sans font-semibold text-[#4A4A30] text-xs md:text-sm">
                   {faq.q}
                 </span>
                 {isOpen ? (
-                  <ChevronUp className="w-4 h-4 text-[#0F62FE] shrink-0 ml-2" />
+                  <ChevronUp className="w-4 h-4 text-[#5A5A40] shrink-0 ml-2" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-[#0F62FE] shrink-0 ml-2" />
+                  <ChevronDown className="w-4 h-4 text-[#5A5A40] shrink-0 ml-2" />
                 )}
               </button>
               {isOpen && (
-                <div className="p-4 bg-white border-t border-[#E0E0E0] font-sans text-xs text-[#161616] leading-relaxed">
+                <div className="p-4 bg-white border-t border-[#DEDCCF] font-sans text-xs text-[#2A2A1E] leading-relaxed">
                   {faq.a}
                 </div>
               )}

@@ -31,7 +31,7 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
   };
 
   return (
-    <footer id="app-footer" className="bg-[#161616] text-white border-t border-white/10 mt-12">
+    <footer id="app-footer" className="bg-[#5A5A40] text-white border-t border-[#4A4A30]/30 mt-12">
       <div className="max-w-[1536px] mx-auto px-6 py-12 md:py-16">
         {/* Main Grid Columns */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-12">
@@ -39,11 +39,11 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
           {/* Column 1: Brand & About */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-[#0F62FE] to-[#8A3FFC] border border-white/20">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/10 border border-white/20">
                 <Cpu className="w-4 h-4 text-white" />
               </div>
-              <span className="font-display italic font-bold text-xl tracking-tight bg-gradient-to-r from-[#4D98FF] to-[#A56EFF] bg-clip-text text-transparent">Startup Funding Hub</span>
-              <span className="bg-gradient-to-r from-[#0F62FE] to-[#8A3FFC] text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase border border-white/25">
+              <span className="font-display italic font-bold text-xl tracking-tight">Startup Funding Hub</span>
+              <span className="bg-white/15 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded uppercase border border-white/25">
                 IBM Granite
               </span>
             </div>
@@ -61,20 +61,20 @@ export default function Footer({ currentLanguage, onOpenPolicy }: FooterProps) {
             </h4>
             <div className="space-y-2 text-xs font-mono text-white/90">
               <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                <Globe className="w-3.5 h-3.5 text-[#198038]" />
-                <span>NLU: <strong className="text-[#198038]">Watson NLU Analysed</strong></span>
+                <Globe className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>NLU: <strong className="text-[#10B981]">Watson NLU Analysed</strong></span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                <Cpu className="w-3.5 h-3.5 text-[#198038]" />
-                <span>LLM Backend: <strong className="text-[#198038]">Granite-4-H-Small</strong></span>
+                <Cpu className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>LLM Backend: <strong className="text-[#10B981]">Granite-4-H-Small</strong></span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                <Terminal className="w-3.5 h-3.5 text-[#198038]" />
-                <span>Agent Layer: <strong className="text-[#198038]">Watsonx Orchestrate Ready</strong></span>
+                <Terminal className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>Agent Layer: <strong className="text-[#10B981]">Watsonx Orchestrate Ready</strong></span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                <Shield className="w-3.5 h-3.5 text-[#198038]" />
-                <span>Guardrail: <strong className="text-[#198038]">Compliance Layer Active</strong></span>
+                <Shield className="w-3.5 h-3.5 text-[#10B981]" />
+                <span>Guardrail: <strong className="text-[#10B981]">Compliance Layer Active</strong></span>
               </div>
             </div>
           </div>

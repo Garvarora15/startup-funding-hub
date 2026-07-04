@@ -25,17 +25,17 @@ export default function Navbar({ currentLanguage, onLanguageChange }: NavbarProp
   ];
 
   return (
-    <nav className="bg-[#161616] border-b border-white/10 py-3.5 px-6 flex justify-between items-center relative z-10 shadow-sm flex-wrap gap-4">
+    <nav className="bg-[#5A5A40] border-b border-[#4A4A30]/30 py-3.5 px-6 flex justify-between items-center relative z-10 shadow-sm flex-wrap gap-4">
       <div className="flex items-center gap-3">
-        <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-[#0F62FE] to-[#8A3FFC] border border-white/20 shadow-sm">
+        <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-white/10 border border-white/20 shadow-sm">
           <Cpu className="w-5 h-5 text-white" />
-          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#198038] rounded-full border-2 border-[#161616] animate-ping" />
-          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#198038] rounded-full border-2 border-[#161616]" />
+          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#10B981] rounded-full border-2 border-[#5A5A40] animate-ping" />
+          <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#10B981] rounded-full border-2 border-[#5A5A40]" />
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="font-display italic font-bold text-xl bg-gradient-to-r from-[#4D98FF] to-[#A56EFF] bg-clip-text text-transparent tracking-tight">Startup Funding Hub</span>
-            <span className="bg-gradient-to-r from-[#0F62FE] to-[#8A3FFC] text-white text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase border border-white/25">
+            <span className="font-display italic font-bold text-xl text-white tracking-tight">Startup Funding Hub</span>
+            <span className="bg-white/15 text-white text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full tracking-wider uppercase border border-white/25">
               IBM Granite
             </span>
           </div>
@@ -69,16 +69,16 @@ export default function Navbar({ currentLanguage, onLanguageChange }: NavbarProp
           </span>
         </div>
         <div className="hidden md:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-white">
-          <Wifi className="w-3.5 h-3.5 text-[#198038] animate-pulse" />
-          <span>Watsonx LLM: <strong className="text-[#198038]">ACTIVE</strong></span>
+          <Wifi className="w-3.5 h-3.5 text-[#10B981] animate-pulse" />
+          <span>Watsonx LLM: <strong className="text-[#10B981]">ACTIVE</strong></span>
         </div>
         <div className="hidden lg:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-white">
-          <Network className="w-3.5 h-3.5 text-[#198038]" />
-          <span>Orchestrate: <strong className="text-[#198038]">READY</strong></span>
+          <Network className="w-3.5 h-3.5 text-[#10B981]" />
+          <span>Orchestrate: <strong className="text-[#10B981]">READY</strong></span>
         </div>
         <div className="hidden lg:flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 text-white">
-          <Shield className="w-3.5 h-3.5 text-[#198038]" />
-          <span>Guardrail: <strong className="text-[#198038]">ACTIVE</strong></span>
+          <Shield className="w-3.5 h-3.5 text-[#10B981]" />
+          <span>Guardrail: <strong className="text-[#10B981]">ACTIVE</strong></span>
         </div>
       </div>
     </nav>

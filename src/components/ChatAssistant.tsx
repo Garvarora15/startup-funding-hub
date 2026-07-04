@@ -35,7 +35,7 @@ function parseMarkdownToHtml(markdown: string) {
 
     if (trimmed.startsWith('```')) {
       inCodeBlock = !inCodeBlock;
-      htmlLines.push(inCodeBlock ? '<pre class="bg-[#FFFFFF] text-[#0353E9] p-3 rounded-xl border border-[#E0E0E0] font-mono text-[11px] overflow-x-auto my-2">' : '</pre>');
+      htmlLines.push(inCodeBlock ? '<pre class="bg-[#F5F5F0] text-[#4A4A30] p-3 rounded-xl border border-[#DEDCCF] font-mono text-[11px] overflow-x-auto my-2">' : '</pre>');
       continue;
     }
     if (inCodeBlock) { htmlLines.push(trimmed); continue; }
@@ -51,23 +51,23 @@ function parseMarkdownToHtml(markdown: string) {
       while (i < lines.length && lines[i].trim().startsWith('|')) {
         const cells = splitTableRow(lines[i].trim());
         bodyRowsHtml.push(
-          `<tr class="border-b border-[#E0E0E0]">${cells.map(c => `<td class="px-2.5 py-1.5 align-top">${parseInlineMarkdown(c)}</td>`).join('')}</tr>`
+          `<tr class="border-b border-[#DEDCCF]">${cells.map(c => `<td class="px-2.5 py-1.5 align-top">${parseInlineMarkdown(c)}</td>`).join('')}</tr>`
         );
         i++;
       }
       i--; // step back one since the outer for-loop will increment
 
-      const theadHtml = `<thead><tr class="bg-[#F4F4F4] border-b-2 border-[#E0E0E0]">${headerCells.map(c => `<th class="px-2.5 py-1.5 text-left font-display font-semibold text-[#0353E9]">${parseInlineMarkdown(c)}</th>`).join('')}</tr></thead>`;
+      const theadHtml = `<thead><tr class="bg-[#F0F0E8] border-b-2 border-[#DEDCCF]">${headerCells.map(c => `<th class="px-2.5 py-1.5 text-left font-display font-semibold text-[#4A4A30]">${parseInlineMarkdown(c)}</th>`).join('')}</tr></thead>`;
       htmlLines.push(
-        `<div class="overflow-x-auto my-3 rounded-lg border border-[#E0E0E0]"><table class="w-full text-[11px] border-collapse">${theadHtml}<tbody>${bodyRowsHtml.join('')}</tbody></table></div>`
+        `<div class="overflow-x-auto my-3 rounded-lg border border-[#DEDCCF]"><table class="w-full text-[11px] border-collapse">${theadHtml}<tbody>${bodyRowsHtml.join('')}</tbody></table></div>`
       );
       continue;
     }
 
-    if (trimmed.startsWith('#### ')) { htmlLines.push(`<h5 class="font-display font-semibold text-[#0353E9] text-xs uppercase tracking-wider mt-4 mb-2">${trimmed.replace('#### ', '')}</h5>`); continue; }
-    if (trimmed.startsWith('### ')) { htmlLines.push(`<h4 class="font-display font-semibold text-[#0F62FE] text-sm mt-5 mb-2">${trimmed.replace('### ', '')}</h4>`); continue; }
-    if (trimmed.startsWith('## ')) { htmlLines.push(`<h3 class="font-display font-bold text-[#1F2328] text-base mt-6 mb-3 border-b border-[#E0E0E0] pb-1">${trimmed.replace('## ', '')}</h3>`); continue; }
-    if (trimmed.startsWith('# ')) { htmlLines.push(`<h2 class="font-display font-bold text-[#1F2328] text-lg mt-6 mb-3">${trimmed.replace('# ', '')}</h2>`); continue; }
+    if (trimmed.startsWith('#### ')) { htmlLines.push(`<h5 class="font-display font-semibold text-[#4A4A30] text-xs uppercase tracking-wider mt-4 mb-2">${trimmed.replace('#### ', '')}</h5>`); continue; }
+    if (trimmed.startsWith('### ')) { htmlLines.push(`<h4 class="font-display font-semibold text-[#5A5A40] text-sm mt-5 mb-2">${trimmed.replace('### ', '')}</h4>`); continue; }
+    if (trimmed.startsWith('## ')) { htmlLines.push(`<h3 class="font-display font-bold text-[#1A1A1A] text-base mt-6 mb-3 border-b border-[#DEDCCF] pb-1">${trimmed.replace('## ', '')}</h3>`); continue; }
+    if (trimmed.startsWith('# ')) { htmlLines.push(`<h2 class="font-display font-bold text-[#1A1A1A] text-lg mt-6 mb-3">${trimmed.replace('# ', '')}</h2>`); continue; }
 
     if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
       let content = trimmed.substring(2);
@@ -87,10 +87,10 @@ function parseMarkdownToHtml(markdown: string) {
 
 function parseInlineMarkdown(text: string) {
   let formatted = text;
-  formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#0353E9]">$1</strong>');
+  formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#4A4A30]">$1</strong>');
   formatted = formatted.replace(/\*(.*?)\*/g, '<em class="italic text-slate-600">$1</em>');
-  formatted = formatted.replace(/`(.*?)`/g, '<code class="bg-[#F4F4F4] text-[#0F62FE] px-1.5 py-0.5 rounded font-mono text-[11px]">$1</code>');
-  formatted = formatted.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#0F62FE] hover:underline font-semibold inline-flex items-center gap-0.5">$1 <span class="text-[9px]">↗</span></a>');
+  formatted = formatted.replace(/`(.*?)`/g, '<code class="bg-[#F0F0E8] text-[#5A5A40] px-1.5 py-0.5 rounded font-mono text-[11px]">$1</code>');
+  formatted = formatted.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#5A5A40] hover:underline font-semibold inline-flex items-center gap-0.5">$1 <span class="text-[9px]">↗</span></a>');
   return formatted;
 }
 
@@ -421,39 +421,39 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
   };
 
   return (
-    <div className="bg-white border border-[#E0E0E0] rounded-2xl shadow-sm flex flex-col h-[780px] relative overflow-hidden">
+    <div className="bg-white border border-[#DEDCCF] rounded-2xl shadow-sm flex flex-col h-[780px] relative overflow-hidden">
 
       {/* Header */}
-      <div className="bg-[#F4F4F4] border-b border-[#E0E0E0] px-5 py-4 flex items-center justify-between">
+      <div className="bg-[#F0F0E8] border-b border-[#DEDCCF] px-5 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#E8EFFE] border border-[#E0E0E0] flex items-center justify-center">
-            <Bot className="w-4 h-4 text-[#0F62FE]" />
+          <div className="w-8 h-8 rounded-lg bg-[#ECEBE4] border border-[#DEDCCF] flex items-center justify-center">
+            <Bot className="w-4 h-4 text-[#5A5A40]" />
           </div>
           <div>
-            <h3 className="font-display font-semibold text-[#0353E9] text-xs uppercase tracking-wider">
+            <h3 className="font-display font-semibold text-[#4A4A30] text-xs uppercase tracking-wider">
               {t.copilotTitle || "IBM Granite Watsonx.ai Co-Pilot"}
             </h3>
-            <p className="text-[10px] text-[#198038] font-mono flex items-center gap-1 mt-0.5 font-semibold">
-              <span className="w-1.5 h-1.5 bg-[#198038] rounded-full animate-pulse" />
+            <p className="text-[10px] text-[#10B981] font-mono flex items-center gap-1 mt-0.5 font-semibold">
+              <span className="w-1.5 h-1.5 bg-[#10B981] rounded-full animate-pulse" />
               {t.onlineStatus} &bull; granite-4-h-small
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 bg-[#E8EFFE] px-2.5 py-1 rounded-full text-[10px] font-mono text-[#0353E9] border border-[#E0E0E0]">
+        <div className="flex items-center gap-1.5 bg-[#ECEBE4] px-2.5 py-1 rounded-full text-[10px] font-mono text-[#4A4A30] border border-[#DEDCCF]">
           <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
           <span>{t.cognitiveCore}</span>
         </div>
       </div>
 
       {/* Messages */}
-      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-5 py-6 space-y-4 bg-[#FFFFFF]/30">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-5 py-6 space-y-4 bg-[#F5F5F0]/30">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex items-start gap-3 max-w-[85%] ${msg.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}>
-            <div className={`w-8 h-8 rounded-lg shrink-0 flex items-center justify-center border text-xs font-mono font-bold ${msg.role === 'user' ? 'bg-[#0F62FE] border-transparent text-white' : 'bg-[#F4F4F4] border-[#E0E0E0] text-[#0F62FE]'}`}>
+            <div className={`w-8 h-8 rounded-lg shrink-0 flex items-center justify-center border text-xs font-mono font-bold ${msg.role === 'user' ? 'bg-[#5A5A40] border-transparent text-white' : 'bg-[#F0F0E8] border-[#DEDCCF] text-[#5A5A40]'}`}>
               {msg.role === 'user' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
             </div>
             <div className="space-y-1">
-              <div className={`p-3.5 rounded-2xl text-xs leading-relaxed ${msg.role === 'user' ? 'bg-[#0F62FE] text-white rounded-tr-none border border-[#0353E9]/15 shadow-sm' : 'bg-white text-slate-800 rounded-tl-none border border-[#E0E0E0] shadow-sm'}`}>
+              <div className={`p-3.5 rounded-2xl text-xs leading-relaxed ${msg.role === 'user' ? 'bg-[#5A5A40] text-white rounded-tr-none border border-[#4A4A30]/15 shadow-sm' : 'bg-white text-slate-800 rounded-tl-none border border-[#DEDCCF] shadow-sm'}`}>
                 {msg.role === 'user' ? (
                   <p className="whitespace-pre-wrap">{msg.content}</p>
                 ) : (
@@ -467,7 +467,7 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
                       key={gName}
                       type="button"
                       onClick={() => onSelectGrantFromChat(gName)}
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#E8EFFE] text-[#0353E9] border border-[#E0E0E0] hover:bg-[#0F62FE] hover:text-white hover:border-transparent transition"
+                      className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-[#ECEBE4] text-[#4A4A30] border border-[#DEDCCF] hover:bg-[#5A5A40] hover:text-white hover:border-transparent transition"
                     >
                       {gName}
                       <ArrowRight className="w-2.5 h-2.5" />
@@ -481,16 +481,16 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
                     type="button"
                     onClick={() => speakMessage(msg.id, msg.content)}
                     title={currentLanguage === 'punjabi' ? 'Punjabi voice quality may be limited or unavailable in your browser' : undefined}
-                    className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] text-[#0F62FE] hover:text-[#0353E9] hover:bg-[#E8EFFE]/50 font-mono font-bold transition cursor-pointer"
+                    className="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] text-[#5A5A40] hover:text-[#4A4A30] hover:bg-[#ECEBE4]/50 font-mono font-bold transition cursor-pointer"
                   >
                     {isPlayingTts && ttsMsgId === msg.id ? (
-                      <><Square className="w-2.5 h-2.5 fill-[#0F62FE] text-[#0F62FE]" /><span>{t.stopLabel}</span></>
+                      <><Square className="w-2.5 h-2.5 fill-[#5A5A40] text-[#5A5A40]" /><span>{t.stopLabel}</span></>
                     ) : (
                       <><Volume2 className="w-3.5 h-3.5" /><span>{t.listenLabel}</span></>
                     )}
                   </button>
                 ) : <div />}
-                <span className="block text-[9px] text-[#57606A] font-mono shrink-0 ml-auto">{msg.timestamp}</span>
+                <span className="block text-[9px] text-[#8E8E80] font-mono shrink-0 ml-auto">{msg.timestamp}</span>
               </div>
             </div>
           </div>
@@ -499,22 +499,22 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
         {/* Reasoning Logs */}
         {loading && (
           <div className="flex items-start gap-3 max-w-[85%]">
-            <div className="w-8 h-8 rounded-lg bg-[#F4F4F4] border border-[#E0E0E0] flex items-center justify-center shrink-0">
-              <Bot className="w-4 h-4 text-[#0F62FE] animate-bounce" />
+            <div className="w-8 h-8 rounded-lg bg-[#F0F0E8] border border-[#DEDCCF] flex items-center justify-center shrink-0">
+              <Bot className="w-4 h-4 text-[#5A5A40] animate-bounce" />
             </div>
-            <div className="space-y-2 bg-[#FFFFFF] border border-[#E0E0E0] p-4 rounded-2xl rounded-tl-none w-full max-w-md shadow-sm">
-              <div className="flex items-center gap-2 text-[10px] font-mono text-[#0F62FE] border-b border-[#E0E0E0] pb-2 mb-2">
+            <div className="space-y-2 bg-[#F5F5F0] border border-[#DEDCCF] p-4 rounded-2xl rounded-tl-none w-full max-w-md shadow-sm">
+              <div className="flex items-center gap-2 text-[10px] font-mono text-[#5A5A40] border-b border-[#DEDCCF] pb-2 mb-2">
                 <Terminal className="w-3.5 h-3.5" />
                 <span>{t.reasoningMonitor}</span>
               </div>
               <div className="space-y-1.5 font-mono text-[9px] text-slate-600">
                 {reasoningLogs.map((log, idx) => (
                   <div key={idx} className="flex items-center gap-1.5 animate-fade-in">
-                    <span className="text-[#198038] font-bold">&gt;</span>
+                    <span className="text-[#10B981] font-bold">&gt;</span>
                     <span>{log}</span>
                   </div>
                 ))}
-                <div className="flex items-center gap-1.5 text-[#0F62FE] animate-pulse">
+                <div className="flex items-center gap-1.5 text-[#5A5A40] animate-pulse">
                   <span>&gt;</span>
                   <span>{t.consolidatingChapters}</span>
                 </div>
@@ -526,13 +526,13 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
 
       {/* Quick Prompts - show until user sends 2 messages */}
       {messages.length <= 2 && (
-        <div className="px-5 py-3 border-t border-[#E0E0E0] bg-[#FFFFFF]">
-          <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#57606A] mb-2">
+        <div className="px-5 py-3 border-t border-[#DEDCCF] bg-[#F5F5F0]">
+          <p className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#8E8E80] mb-2">
             {t.suggestedQueries}
           </p>
           <div className="flex flex-wrap gap-1.5">
             {quickPrompts.map((qp, idx) => (
-              <button key={idx} onClick={() => handleSend(qp.text)} className="bg-white border border-[#E0E0E0] text-slate-700 hover:text-[#0F62FE] hover:border-[#0F62FE] text-[11px] px-2.5 py-1.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-sm">
+              <button key={idx} onClick={() => handleSend(qp.text)} className="bg-white border border-[#DEDCCF] text-slate-700 hover:text-[#5A5A40] hover:border-[#5A5A40] text-[11px] px-2.5 py-1.5 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow-sm">
                 <span>{qp.icon}</span>
                 <span>{qp.text}</span>
               </button>
@@ -542,7 +542,7 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
       )}
 
       {/* Input */}
-      <div className="p-4 bg-[#F4F4F4] border-t border-[#E0E0E0] flex items-center gap-2">
+      <div className="p-4 bg-[#F0F0E8] border-t border-[#DEDCCF] flex items-center gap-2">
         <button
           type="button"
           onClick={toggleListening}
@@ -553,7 +553,7 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
               ? 'bg-rose-500 border-rose-600 text-white animate-pulse'
               : isSyncing
               ? 'bg-amber-500 border-amber-600 text-white cursor-wait'
-              : 'bg-white border-[#E0E0E0] text-[#0F62FE] hover:bg-[#E8EFFE]'
+              : 'bg-white border-[#DEDCCF] text-[#5A5A40] hover:bg-[#ECEBE4]'
           }`}
         >
           {isListening ? (
@@ -567,13 +567,13 @@ export default function ChatAssistant({ startupProfile, onSelectGrantFromChat, c
         <form onSubmit={(e) => { e.preventDefault(); handleSend(input); }} className="flex-1 flex gap-2 relative">
           <input
             type="text"
-            className="flex-1 bg-white text-[#1F2328] text-xs px-4 py-3 rounded-xl border border-[#E0E0E0] focus:outline-none focus:border-[#0F62FE] transition pr-16"
+            className="flex-1 bg-white text-[#1A1A1A] text-xs px-4 py-3 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition pr-16"
             placeholder={isListening ? t.listeningPlaceholder : isSyncing ? t.syncingPlaceholder : (t.chatPlaceholder || "Query Watsonx about grants, eligibility, milestones...")}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={loading}
           />
-          <button type="submit" disabled={!input.trim() || loading} className="absolute right-2 top-1.5 bottom-1.5 bg-[#0F62FE] hover:bg-[#0353E9] disabled:opacity-50 disabled:pointer-events-none text-white px-3.5 rounded-lg flex items-center justify-center transition cursor-pointer">
+          <button type="submit" disabled={!input.trim() || loading} className="absolute right-2 top-1.5 bottom-1.5 bg-[#5A5A40] hover:bg-[#4A4A30] disabled:opacity-50 disabled:pointer-events-none text-white px-3.5 rounded-lg flex items-center justify-center transition cursor-pointer">
             <Send className="w-3.5 h-3.5" />
           </button>
         </form>
