@@ -303,7 +303,7 @@ Every feature that depends on an external service degrades gracefully instead of
 
 ## 📜 License
 
-MIT — Built as part of the **IBM Skills Build for University Engagements**m
+MIT — Built as part of the **IBM Skills Build for University Engagements**.
 
 **Problem Statement #18** — AI Grant and Funding Finder for Startups
 

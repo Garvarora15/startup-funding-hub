@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Grant } from '../types';
-import { Award, Calendar, FileText, CheckCircle, AlertTriangle, ExternalLink, ChevronDown, ChevronUp, Clock, AlertCircle, Volume2, Square, RefreshCw, Star } from 'lucide-react';
+import { Calendar, FileText, CheckCircle, AlertTriangle, ExternalLink, ChevronDown, ChevronUp, Clock, AlertCircle, Volume2, Square, RefreshCw, Star } from 'lucide-react';
 import { TRANSLATIONS } from '../locales/translations';
 
 interface GrantCardProps {

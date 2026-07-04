@@ -1,4 +1,4 @@
-import { Mail, Shield, ShieldAlert, Heart, Terminal, Cpu, Globe, ExternalLink } from 'lucide-react';
+import { Mail, Shield, Heart, Terminal, Cpu, Globe } from 'lucide-react';
 
 interface FooterProps {
   currentLanguage: string;

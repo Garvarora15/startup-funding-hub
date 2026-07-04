@@ -9,7 +9,7 @@ import ProposalGenerator from './components/ProposalGenerator';
 import Footer from './components/Footer';
 import PolicyModal from './components/PolicyModal';
 import CollapsibleFAQ from './components/CollapsibleFAQ';
-import { Search, Cpu, Sparkles, Database, FileText, Bot, HelpCircle, RefreshCw, Save, Star } from 'lucide-react';
+import { Search, Database, FileText, Bot, HelpCircle, RefreshCw, Save, Star } from 'lucide-react';
 import { TRANSLATIONS } from './locales/translations';
 
 export default function App() {
@@ -117,7 +117,8 @@ export default function App() {
     { value: 'spacetech', label: t.domainSpacetech || 'Space Technology' },
     { value: 'mobility', label: t.domainMobility || 'EV & Mobility' },
     { value: 'ecommerce', label: t.domainEcommerce || 'D2C & E-commerce' },
-    { value: 'gaming', label: t.domainGaming || 'Gaming, AVGC & Media' }
+    { value: 'gaming', label: t.domainGaming || 'Gaming, AVGC & Media' },
+    { value: 'logistics', label: t.domainLogistics || 'Logistics & Trucking' }
   ];
 
   const minAmountOptions = [

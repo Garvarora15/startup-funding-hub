@@ -20,6 +20,17 @@ interface SavedProposalDraft {
   createdAt: string;
 }
 
+interface ProposalFormState {
+  startupName: string;
+  startupDescription: string;
+  stage: string;
+  domain: string;
+  targetGrantName: string;
+  targetGrantDetails: string;
+  additionalNotes: string;
+  tone: string;
+}
+
 // Detects a markdown table separator row like: |---|:---:|---|  or  ---|---
 function isTableSeparatorRow(line: string) {
   const t = line.trim();
@@ -172,6 +183,11 @@ export default function ProposalGenerator({
     grantEligibility: 'लक्षित योजना और पात्रता नियम',
     startupDesc: 'स्टार्टअप मुख्य विवरण / तकनीकी नवीनता',
     additionalNotes: 'अतिरिक्त रणनीतिक नोट्स (वैकल्पिक)',
+    toneLabel: 'प्रस्ताव का लहजा',
+    toneFormal: 'व्यावसायिक और औपचारिक',
+    toneTechnical: 'तकनीकी और डेटा-संचालित',
+    tonePersuasive: 'प्रेरक और प्रभाव-केंद्रित',
+    toneConcise: 'संक्षिप्त और कार्यकारी सारांश',
     inferenceRunning: 'अनुमान चल रहा है...',
     draftBtn: 'IBM ग्रेनाइट के साथ प्रस्ताव का मसौदा तैयार करें',
     draftDoc: 'प्रस्ताव मसौदा दस्तावेज़',
@@ -192,6 +208,11 @@ export default function ProposalGenerator({
     grantEligibility: 'ਲਕਸ਼ਿਤ ਯੋਜਨਾ ਅਤੇ ਯੋਗਤਾ ਨਿਯਮ',
     startupDesc: 'ਸਟਾਰਟਅੱਪ ਮੁੱਖ ਵੇਰਵਾ / ਤਕਨੀਕੀ ਨਵੀਨਤਾ',
     additionalNotes: 'ਵਾਧੂ ਰਣਨੀਤਕ ਨੋਟਸ (ਵਿਕਲਪਿਕ)',
+    toneLabel: 'ਪ੍ਰਸਤਾਵ ਦਾ ਲਹਿਜ਼ਾ',
+    toneFormal: 'ਪੇਸ਼ੇਵਰ ਅਤੇ ਰਸਮੀ',
+    toneTechnical: 'ਤਕਨੀਕੀ ਅਤੇ ਡੇਟਾ-ਸੰਚਾਲਿਤ',
+    tonePersuasive: 'ਪ੍ਰੇਰਕ ਅਤੇ ਪ੍ਰਭਾਵ-ਕੇਂਦ੍ਰਿਤ',
+    toneConcise: 'ਸੰਖੇਪ ਅਤੇ ਕਾਰਜਕਾਰੀ ਸਾਰ',
     inferenceRunning: 'ਅਨੁਮਾਨ ਚੱਲ ਰਿਹਾ ਹੈ...',
     draftBtn: 'IBM ਗ੍ਰੇਨਾਈਟ ਨਾਲ ਪ੍ਰਸਤਾਵ ਦਾ ਖਰੜਾ ਤਿਆਰ ਕਰੋ',
     draftDoc: 'ਪ੍ਰਸਤਾਵ ਖਰੜਾ ਦਸਤਾਵੇਜ਼',
@@ -212,6 +233,11 @@ export default function ProposalGenerator({
     grantEligibility: 'Target Grant & Eligibility Rules',
     startupDesc: 'Startup Core Description / Tech Novelty',
     additionalNotes: 'Additional Strategic Notes (Optional)',
+    toneLabel: 'Proposal Tone',
+    toneFormal: 'Professional & Formal',
+    toneTechnical: 'Technical & Data-Driven',
+    tonePersuasive: 'Persuasive & Impact-Focused',
+    toneConcise: 'Concise & Executive Summary',
     inferenceRunning: 'Inference Running...',
     draftBtn: 'Draft Proposal with IBM Granite',
     draftDoc: 'Proposal Draft Document',
@@ -223,13 +249,13 @@ export default function ProposalGenerator({
     initializeDesc: 'Complete the parameters on the left and click "Draft Proposal with IBM Granite" to auto-compile highly structured, compliant public funding and academic study proposals.'
   };
 
-  const [form, setForm] = useState(() => {
+  const [form, setForm] = useState<ProposalFormState>(() => {
     const raw = localStorage.getItem('fundai_active_proposal_draft');
     if (raw) {
       try {
         const parsed = JSON.parse(raw);
         if (parsed && parsed.form) {
-          return parsed.form;
+          return parsed.form as ProposalFormState;
         }
       } catch (err) {
         console.error("Failed to parse active proposal draft form:", err);
@@ -242,7 +268,8 @@ export default function ProposalGenerator({
       domain: 'any',
       targetGrantName: '',
       targetGrantDetails: '',
-      additionalNotes: ''
+      additionalNotes: '',
+      tone: 'formal'
     };
   });
 
@@ -762,6 +789,22 @@ export default function ProposalGenerator({
               value={form.additionalNotes}
               onChange={(e) => setForm({ ...form, additionalNotes: e.target.value })}
             />
+          </div>
+
+          <div>
+            <label className="block text-[10px] font-semibold text-[#5A5A40] uppercase tracking-wider mb-1.5">
+              {labels.toneLabel}
+            </label>
+            <select
+              className="w-full bg-white text-[#1A1A1A] px-3 py-2 rounded-xl border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] text-[11px]"
+              value={form.tone || 'formal'}
+              onChange={(e) => setForm({ ...form, tone: e.target.value })}
+            >
+              <option value="formal">{labels.toneFormal}</option>
+              <option value="technical">{labels.toneTechnical}</option>
+              <option value="persuasive">{labels.tonePersuasive}</option>
+              <option value="concise">{labels.toneConcise}</option>
+            </select>
           </div>
 
           {error && (
