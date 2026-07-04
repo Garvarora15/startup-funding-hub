@@ -126,6 +126,7 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
     { value: 'mobility', label: t.domainMobility },
     { value: 'ecommerce', label: t.domainEcommerce },
     { value: 'gaming', label: t.domainGaming },
+    { value: 'logistics', label: t.domainLogistics },
   ];
 
   const stages = [
@@ -278,7 +279,7 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
             </span>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <div>
               <label className="block text-[9px] font-semibold text-[#5A5A40] uppercase tracking-wider mb-1">
                 {t.formatLabel}
@@ -290,6 +291,21 @@ export default function StartupProfileForm({ profile, onChange, currentLanguage 
               >
                 {pitchFormats.map(f => (
                   <option key={f.value} value={f.value}>{f.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[9px] font-semibold text-[#5A5A40] uppercase tracking-wider mb-1">
+                {t.pitchLanguageLabel}
+              </label>
+              <select
+                className="w-full bg-white text-[#1A1A1A] text-xs px-2 py-1.5 rounded-lg border border-[#DEDCCF] focus:outline-none focus:border-[#5A5A40] transition"
+                value={profile.pitchLanguage || 'english'}
+                onChange={(e) => handleChange('pitchLanguage', e.target.value)}
+              >
+                {pitchLanguages.map(l => (
+                  <option key={l.value} value={l.value}>{l.label}</option>
                 ))}
               </select>
             </div>

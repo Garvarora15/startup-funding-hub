@@ -1,7 +1,24 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { callGraniteWithRetry } from '../lib/watsonx.js';
 
-function getSmartFallbackPitch(name: string, domain: string, stage: string, format: string, language: string, frequency: string): string {
+const STAGE_LABELS: Record<string, string> = {
+  idea: 'idea-stage',
+  prototype: 'prototype-stage',
+  seed: 'seed-stage',
+  early: 'early-revenue',
+  growth: 'growth-stage',
+};
+
+const LANGUAGE_NOTICE: Record<string, string> = {
+  hindi: `\n\n_(यह पिच फ़िलहाल अंग्रेज़ी में दिखाई जा रही है क्योंकि AI सेवा अस्थायी रूप से अनुपलब्ध है — कृपया थोड़ी देर बाद फिर से प्रयास करें।)_`,
+  punjabi: `\n\n_(ਇਹ ਪਿੱਚ ਹਾਲ ਦੀ ਘੜੀ ਅੰਗਰੇਜ਼ੀ ਵਿੱਚ ਦਿਖਾਈ ਜਾ ਰਹੀ ਹੈ ਕਿਉਂਕਿ AI ਸੇਵਾ ਅਸਥਾਈ ਤੌਰ 'ਤੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ — ਕਿਰਪਾ ਕਰਕੇ ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।)_`,
+  spanish: `\n\n_(Este pitch se muestra en inglés porque el servicio de IA no está disponible temporalmente — inténtalo de nuevo en unos minutos.)_`,
+  french: `\n\n_(Ce pitch est affiché en anglais car le service d'IA est temporairement indisponible — veuillez réessayer dans quelques minutes.)_`,
+  german: '\n\n_(Dieser Pitch wird auf Englisch angezeigt, da der KI-Dienst vorübergehend nicht verfügbar ist — bitte versuchen Sie es in ein paar Minuten erneut.)_',
+  japanese: '\n\n_(AIサービスが一時的に利用できないため、このピッチは英語で表示されています。数分後にもう一度お試しください。)_',
+};
+
+function getSmartFallbackPitch(name: string, domain: string, stage: string, format: string, language: string, _frequency: string): string {
   const domainMap: Record<string, { problem: string; tech: string; impact: string }> = {
     ai: { problem: 'critical bottlenecks in manual data structuring and decision intelligence', tech: 'proprietary advanced generative AI and ML engines', impact: 'doubles engineering productivity and lowers operational overheads by 45%' },
     deeptech: { problem: 'slow, manual experimentation cycles in advanced materials and robotics R&D', tech: 'proprietary deep-tech simulation and robotic automation platforms', impact: 'compresses multi-year R&D cycles into months while cutting prototyping costs by half' },
@@ -21,11 +38,20 @@ function getSmartFallbackPitch(name: string, domain: string, stage: string, form
   };
   const d = domainMap[(domain || 'any').toLowerCase()] || domainMap.any;
   const fmt = (format || 'elevator').toLowerCase();
+  const stageLabel = STAGE_LABELS[(stage || '').toLowerCase()] || 'growing';
+  const notice = LANGUAGE_NOTICE[(language || '').toLowerCase()] || '';
 
-  if (fmt === 'twitter') return `Introducing ${name}! 🚀 Solving ${d.problem} using ${d.tech} to ensure ${d.impact}. Join our mission. #Startup #${(domain || 'Tech').charAt(0).toUpperCase() + (domain || 'Tech').slice(1)} #Innovation`;
-  if (fmt === 'investor-hook') return `**INVESTOR ALERT:** ${name} is targeting the trillion-dollar problem of ${d.problem}.\n\nBy deploying ${d.tech}, our high-growth model ensures that ${d.impact} — creating a massive market entry point with strong IP defensibility, government grant backing, and a clear path to Series A.\n\n**The opportunity is now. We're raising to scale.**`;
-  if (fmt === 'one-pager') return `### ${name} — Executive One-Pager\n\n**The Problem**\nIndustry is crippled by ${d.problem}, costing enterprises billions annually in inefficiency and lost potential.\n\n**Our Technology**\nWe deploy ${d.tech} that directly tackles this systemic challenge with unprecedented precision and scalability.\n\n**Strategic Impact**\n${d.impact} — positioning ${name} as a category-defining leader in the ${domain || 'technology'} sector with strong alignment to India's self-reliance mission.`;
-  return `${name} is solving the critical problem of ${d.problem} through the strategic deployment of ${d.tech}, ensuring that ${d.impact} — driving India's ${domain || 'technology'} ecosystem forward.`;
+  let pitch: string;
+  if (fmt === 'twitter') {
+    pitch = `Introducing ${name}! 🚀 A ${stageLabel} venture solving ${d.problem} using ${d.tech} to ensure ${d.impact}. Join our mission. #Startup #${(domain || 'Tech').charAt(0).toUpperCase() + (domain || 'Tech').slice(1)} #Innovation`;
+  } else if (fmt === 'investor-hook') {
+    pitch = `**INVESTOR ALERT:** ${name}, a ${stageLabel} venture, is targeting the trillion-dollar problem of ${d.problem}.\n\nBy deploying ${d.tech}, our high-growth model ensures that ${d.impact} — creating a massive market entry point with strong IP defensibility, government grant backing, and a clear path to Series A.\n\n**The opportunity is now. We're raising to scale.**`;
+  } else if (fmt === 'one-pager') {
+    pitch = `### ${name} — Executive One-Pager\n\n**Stage**\n${stageLabel.replace('-', ' ')}\n\n**The Problem**\nIndustry is crippled by ${d.problem}, costing enterprises billions annually in inefficiency and lost potential.\n\n**Our Technology**\nWe deploy ${d.tech} that directly tackles this systemic challenge with unprecedented precision and scalability.\n\n**Strategic Impact**\n${d.impact} — positioning ${name} as a category-defining leader in the ${domain || 'technology'} sector with strong alignment to India's self-reliance mission.`;
+  } else {
+    pitch = `${name}, a ${stageLabel} venture, is solving the critical problem of ${d.problem} through the strategic deployment of ${d.tech}, ensuring that ${d.impact} — driving India's ${domain || 'technology'} ecosystem forward.`;
+  }
+  return pitch + notice;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
